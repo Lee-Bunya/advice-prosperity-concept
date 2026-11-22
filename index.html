@@ -21,7 +21,7 @@
   --bluestone:#1B2A38;--brick:#A9533A;--ledger:#3D4E42;--workshirt:#56718E;--wheat:#C8AE86;--fleece:#F6F1E8;
   --maple:#E8673E;--brass:#D9A441;--overcast:#A8C0D2;
   --deep:#111C26;--ink:#2E3A44;--lace:#FDFBF8;--rule:#E4DDD1;--tin:#D5D9DB;
-  --max:1220px;--gutter:clamp(20px,5vw,72px);
+  --max:1440px;--gutter:clamp(20px,5vw,72px);
   --ease:cubic-bezier(.16,.84,.24,1);
   --a:var(--maple);--b:var(--brick);
 }
@@ -88,8 +88,7 @@ h3{font-size:clamp(24px,2.6vw,34px);letter-spacing:-.025em;line-height:1.12}
 .lk.dark{--w:var(--fleece);--ait:transparent;--apk:#F6F1E8}
 
 /* header, hero and footer run wide, like the brand guide's website example */
-:root{--wide-edge:max(clamp(20px,5vw,72px),calc((100vw - 1440px)/2))}
-.nav .wrap,.hero .wrap,footer .wrap{max-width:none;padding-inline:var(--wide-edge)}
+:root{--wide-edge:max(var(--gutter),calc((100% - var(--max))/2))}
 
 /* ===== Nav ===== */
 .nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--fleece) 90%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(27,42,56,.1)}
@@ -188,7 +187,7 @@ h3{font-size:clamp(24px,2.6vw,34px);letter-spacing:-.025em;line-height:1.12}
 .bn-pipe b{display:block;font-weight:600;font-size:clamp(14px,1.4vw,19px);color:var(--fleece);letter-spacing:-.01em}
 .bn-pipe span{display:block;font-size:13px;line-height:1.45;color:rgba(246,241,232,.78);margin-top:6px}
 .bn-pipe .tag{margin-top:34px;display:inline-flex;gap:10px;align-items:center;font-size:13px;font-weight:600;color:var(--wheat);border:1px solid rgba(200,174,134,.4);padding:9px 18px;border-radius:999px}
-.bn-note{position:absolute;left:var(--gutter);bottom:20px;font-size:12px;color:rgba(246,241,232,.62);z-index:2}
+.bn-note{position:absolute;left:var(--wide-edge);bottom:20px;font-size:12px;color:rgba(246,241,232,.62);z-index:2}
 @media (max-width:760px){
   .bn-grid{grid-template-columns:repeat(7,1fr);gap:6px;max-width:330px}
   .bn-grid i{aspect-ratio:1/1.05}
