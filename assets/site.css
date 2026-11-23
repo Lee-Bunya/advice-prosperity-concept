@@ -229,13 +229,13 @@ h3{font-size:clamp(24px,2.6vw,34px);letter-spacing:-.025em;line-height:1.12}
 .ff{padding:6px 20px 18px}
 .ff-prog{height:3px;background:var(--rule);position:relative}
 .ff-prog i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--brick);transition:width 2.2s var(--ease) .3s}
-.in .ff-prog i{width:94%}
+.play .ff-prog i{width:94%}
 .ff h5{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brick);font-weight:600;margin:16px 0 4px}
 .ff .r{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--rule);font-size:13px}
 .ff .r span:first-child{color:var(--ink)}
 .ff .r b{font-weight:600}
 .js .ff .r b,.js .ff .r .src{opacity:0;transform:translateX(-6px);transition:opacity .5s var(--ease),transform .5s var(--ease);transition-delay:calc(var(--i)*.22s + .4s)}
-.js .in .ff .r b,.js .in .ff .r .src{opacity:1;transform:none}
+.js .play .ff .r b,.js .play .ff .r .src{opacity:1;transform:none}
 .js .ff .r .src{transition-delay:calc(var(--i)*.22s + .55s)}
 .ff blockquote{margin-top:14px;padding:12px 14px;background:var(--fleece);border-left:2px solid var(--brick);font-size:13px;line-height:1.5;color:var(--bluestone)}
 /* pack */
@@ -559,3 +559,50 @@ footer .wrap{display:block}
 .ft-base{display:flex;justify-content:space-between;gap:12px 28px;flex-wrap:wrap;padding:20px 0 30px;border-top:1px solid rgba(246,241,232,.14);font-size:13px}
 .ft-base a{color:inherit;text-decoration:none}
 .ft-base a:hover{color:var(--wheat)}
+
+/* ================= Homepage rework: glimpses, bands, calls to action ================= */
+.rst,.rst *{transition:none!important}
+.ok.press{transform:scale(.96);background:var(--brick);border-color:var(--brick)}
+.ok{transition:background .25s,border-color .25s,transform .15s}
+.js .rvw .ch{opacity:0;transform:translateY(6px);transition:opacity .5s var(--ease),transform .5s var(--ease);transition-delay:calc(var(--i,0)*.55s + .4s)}
+.js .play .rvw .ch{opacity:1;transform:none}
+.js .rvw .bar i{width:0;transition:width 1.8s var(--ease) .6s}
+.js .play .rvw .bar i{width:30%}
+@media (prefers-reduced-motion:reduce){.js .rvw .ch{opacity:1!important;transform:none!important;transition:none!important}.js .rvw .bar i{width:30%!important;transition:none!important}}
+
+.chap-tx h3{font-size:clamp(24px,2.5vw,34px);line-height:1.16}
+.chap-tx h3 span{color:var(--workshirt)}
+.chap-tx .btn{margin-top:26px}
+
+.tagline{display:flex;align-items:center;gap:12px;margin-top:34px;font-weight:600;font-size:clamp(17px,1.5vw,21px);letter-spacing:-.015em;color:var(--bluestone)}
+.tagline::before{content:"";flex:0 0 16px;height:16px;border-radius:0 100% 0 0;background:conic-gradient(from 0deg at 0 100%,var(--maple),var(--brick) 90deg)}
+.tagline.light{color:var(--wheat);margin:0 0 22px}
+.close .tagline.light{font-size:clamp(17px,1.5vw,21px);max-width:none}
+
+.bn-cta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:34px}
+.bn-cta .tag{margin-top:0}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px}
+
+/* photo story bands */
+.band{position:relative;overflow:hidden;background:var(--fleece);display:flex;align-items:center;min-height:min(80vh,660px)}
+.band .wrap{width:100%;max-width:none;padding-inline:var(--wide-edge);position:relative;z-index:2}
+.band-tx{width:42%;padding:clamp(56px,7vw,110px) 0}
+.band.flip .band-tx{margin-left:auto}
+.band .eyebrow::before{display:none}
+.band h2{font-size:clamp(36px,4.1vw,62px);letter-spacing:-.04em;line-height:1.02}
+.band h2 span{display:block;color:var(--brick)}
+.band p{margin-top:24px;font-size:clamp(16px,1.35vw,19px);line-height:1.6;max-width:25em}
+.band .btn{margin-top:28px}
+.band-ph{position:absolute;top:0;bottom:0;right:0;width:50%;overflow:hidden;border-top-left-radius:min(34vw,520px);background:var(--tin)}
+.band.flip .band-ph{right:auto;left:0;border-top-left-radius:0;border-top-right-radius:min(34vw,520px)}
+.band-ph img{width:100%;height:100%;object-fit:cover;object-position:var(--pos,center)}
+.band>.arcset{width:11%;z-index:3}
+.band>.arcset.bl{left:44.5%}
+.band>.arcset.br{right:44.5%}
+@media (max-width:900px){
+  .band{display:block;min-height:0}
+  .band-tx{width:auto;padding:52px 0 36px}
+  .band-ph,.band.flip .band-ph{position:relative;width:auto;left:auto;right:auto;aspect-ratio:1/1;margin:0 0 0 14%;border-radius:0;border-top-left-radius:46vw}
+  .band.flip .band-ph{margin:0 14% 0 0;border-top-left-radius:0;border-top-right-radius:46vw}
+  .band>.arcset{display:none}
+}

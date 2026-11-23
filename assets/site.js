@@ -6,57 +6,90 @@
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.18,rootMargin:'0px 0px -6% 0px'});
   d.querySelectorAll('.rv,.arcset,.approve').forEach(function(el){io.observe(el)});
 
-  /* nav rule */
   var nav=d.getElementById('nav');
-  function navState(){}
 
   /* phone menu */
   var tg=d.querySelector('.nav-toggle');
   if(tg){tg.addEventListener('click',function(){var o=nav.classList.toggle('open');tg.setAttribute('aria-expanded',o)});
     d.querySelectorAll('#menu a').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open');tg.setAttribute('aria-expanded','false')})})}
 
-  /* hero approvals */
-  d.querySelectorAll('[data-approve-card]').forEach(function(card){
-    var left=card.querySelectorAll('[data-ok]').length;
-    card.addEventListener('click',function(e){
-      var b=e.target.closest('[data-ok]'); if(!b||b.classList.contains('done'))return;
-      b.classList.add('done'); b.textContent='Approved'; b.disabled=true;
-      var row=b.closest('.row'); row.classList.add('done');
-      row.querySelector('small').textContent='Approved by you · filed to the client record';
-      left--;
-      card.querySelector('[data-count]').textContent=left?left+' prepared':'All clear';
-      if(!left)card.querySelector('[data-foot]').textContent='All approved. Nothing is waiting on you.';
-    });
-  });
-
-  /* SOA pack approval */
-  var pk=d.querySelector('[data-pk]');
-  if(pk)pk.addEventListener('click',function(){
-    if(pk.classList.contains('done'))return;
-    pk.classList.add('done'); pk.textContent='Approved'; pk.disabled=true;
-    d.querySelector('[data-pk-st]').textContent='With paraplanning';
-    d.querySelector('[data-pk-log]').textContent='Approved by Liam Hartley · just now. Sent to paraplanning with 6 attachments.';
-    var sp=d.querySelector('.pk-side p'); if(sp)sp.textContent='The Spencers have moved to Paraplanning on the board.';
-  });
-
-  /* kanban: the Spencers move from Fact find to Strategy */
-  var kbWrap=d.querySelector('[data-kanban]');
-  if(kbWrap){
-    var kio=new IntersectionObserver(function(es){es.forEach(function(e){
-      if(!e.isIntersecting)return; kio.disconnect();
-      setTimeout(function(){
-        var card=kbWrap.querySelector('[data-mover]'),from=kbWrap.querySelector('[data-from]'),to=kbWrap.querySelector('[data-to]');
-        var a=card.getBoundingClientRect();
-        to.appendChild(card);
-        card.querySelector('small').textContent='Paper being prepared';
-        from.querySelector('[data-n]').textContent='1'; to.querySelector('[data-n]').textContent='2';
-        var b=card.getBoundingClientRect();
-        card.classList.add('hot');
-        if(!reduce&&card.animate)card.animate([{transform:'translate('+(a.left-b.left)+'px,'+(a.top-b.top)+'px)'},{transform:'none'}],{duration:900,easing:'cubic-bezier(.16,.84,.24,1)'});
-      },900);
-    })},{threshold:.55});
-    kio.observe(kbWrap);
+  /* ---------- self-playing product glimpses ----------
+     Each one loops while it is on screen and stops when it leaves.
+     steps = [[ms, fn, isReset]]. With reduced motion, nothing loops:
+     the forward steps are applied once so the finished state shows. */
+  function loop(el,steps,total){
+    if(reduce){steps.forEach(function(s){if(!s[2])s[1]()});return}
+    var t=[],on=false;
+    function run(){steps.forEach(function(s){t.push(setTimeout(s[1],s[0]))});t.push(setTimeout(function(){t=[];run()},total))}
+    new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting&&!on){on=true;run()}
+      else if(!e.isIntersecting&&on){on=false;t.forEach(clearTimeout);t=[]}
+    })},{threshold:.35}).observe(el);
   }
+
+  /* approval cards (hero and the morning screen) */
+  d.querySelectorAll('[data-approve-card]').forEach(function(card){
+    var btns=[].slice.call(card.querySelectorAll('[data-ok]')),cnt=card.querySelector('[data-count]'),foot=card.querySelector('[data-foot]');
+    var subs=btns.map(function(b){return b.closest('.row').querySelector('small').textContent}),foot0=foot.textContent;
+    function left(){return btns.filter(function(b){return !b.classList.contains('done')}).length}
+    function approve(b){
+      if(b.classList.contains('done'))return;
+      b.classList.add('done');b.textContent='Approved';
+      var row=b.closest('.row');row.classList.add('done');
+      row.querySelector('small').textContent='Approved by you · filed to the client record';
+      var n=left();cnt.textContent=n?n+' prepared':'All clear';
+      if(!n)foot.textContent='All approved. Nothing is waiting on you.';
+    }
+    function reset(){
+      btns.forEach(function(b,i){b.classList.remove('done');b.textContent='Approve';var row=b.closest('.row');row.classList.remove('done');row.querySelector('small').textContent=subs[i]});
+      cnt.textContent=btns.length+' prepared';foot.textContent=foot0;
+    }
+    card.addEventListener('click',function(e){var b=e.target.closest('[data-ok]');if(b)approve(b)});
+    var steps=[[0,reset,true]];
+    btns.forEach(function(b,i){steps.push([1700+i*1500,function(){approve(b)}])});
+    loop(card,steps,1700+btns.length*1500+2600);
+  });
+
+  /* SOA request pack */
+  d.querySelectorAll('[data-pk]').forEach(function(pk){
+    var win=pk.closest('.win'),st=win.querySelector('[data-pk-st]'),log=win.querySelector('[data-pk-log]'),sp=win.querySelector('.pk-side p');
+    var label=pk.textContent,sp0=sp.textContent;
+    function approve(){
+      if(pk.classList.contains('done'))return;
+      pk.classList.add('done');pk.textContent='Approved';st.textContent='With paraplanning';
+      log.textContent='Approved by Liam Hartley · just now. Sent to paraplanning with 6 attachments.';
+      sp.textContent='The Spencers have moved to Paraplanning on the board.';
+    }
+    function reset(){pk.classList.remove('done','press');pk.textContent=label;st.textContent='Waiting for you';log.textContent='';sp.textContent=sp0}
+    pk.addEventListener('click',approve);
+    loop(win,[[0,reset,true],[2300,function(){pk.classList.add('press')},true],[2650,function(){pk.classList.remove('press');approve()}]],7600);
+  });
+
+  /* pipeline board: the Spencers move across */
+  d.querySelectorAll('[data-kanban]').forEach(function(wrap){
+    var cols=[].slice.call(wrap.querySelectorAll('.kb .col')),card=wrap.querySelector('[data-mover]'),tag=card.querySelector('small');
+    var home=cols.indexOf(card.parentNode),tag0=tag.textContent;
+    function counts(){cols.forEach(function(c){c.querySelector('h4 span').textContent=c.querySelectorAll('.kc').length})}
+    function move(i,text,quiet){
+      var a=card.getBoundingClientRect();
+      if(i===home)cols[i].insertBefore(card,cols[i].querySelector('.kc'));else cols[i].appendChild(card);
+      tag.textContent=text;counts();card.classList.toggle('hot',i!==home);
+      var b=card.getBoundingClientRect();
+      if(!quiet&&!reduce&&card.animate)card.animate([{transform:'translate('+(a.left-b.left)+'px,'+(a.top-b.top)+'px)'},{transform:'none'}],{duration:900,easing:'cubic-bezier(.16,.84,.24,1)'});
+    }
+    var labels=['Strategy paper being prepared','SOA request pack prepared','With the paraplanner'];
+    var steps=[[0,function(){move(home,tag0,true)},true]];
+    labels.forEach(function(text,n){if(cols[home+1+n])steps.push([1500+n*2200,function(){move(home+1+n,text)},n>0])});
+    loop(wrap,steps,1500+labels.length*2200+1800);
+  });
+
+  /* screens that fill themselves: fact find, review */
+  d.querySelectorAll('.ff,.rvw').forEach(function(body){
+    var win=body.closest('.win');
+    [].forEach.call(body.querySelectorAll('.ch'),function(c,i){c.style.setProperty('--i',i)});
+    function reset(){win.classList.add('rst');win.classList.remove('play');void win.offsetWidth;win.classList.remove('rst')}
+    loop(win,[[0,reset,true],[350,function(){win.classList.add('play')}]],8200);
+  });
 
   /* bottleneck scene (homepage only) */
   if(d.getElementById('bottleneck')){
@@ -74,10 +107,9 @@
     if(phase!==lastPhase){lastPhase=phase;bn.dataset.phase=phase;if(phase==='2')wEl.textContent='4 days of advice. 17 days of everything else.'; else if(phase==='1')wEl.textContent=days[day-1][0]}
   }
   var tick=false;
-  addEventListener('scroll',function(){if(tick)return;tick=true;requestAnimationFrame(function(){tick=false;navState();bnState()})},{passive:true});
+  addEventListener('scroll',function(){if(tick)return;tick=true;requestAnimationFrame(function(){tick=false;bnState()})},{passive:true});
   addEventListener('resize',bnState);
-  navState();bnState();
-
+  bnState();
   }
 
   /* pricing (homepage only) */
