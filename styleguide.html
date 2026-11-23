@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website style guide — Advice Prosperity</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+/* layout for this reference page only; every sample below is drawn by assets/site.css */
+.sg{background:var(--lace)}
+.sg-head{background:var(--bluestone);color:var(--fleece);padding:clamp(56px,7vw,110px) 0 clamp(48px,6vw,90px);position:relative;overflow:hidden}
+.sg-head .lk{--fs:22px;display:flex;width:fit-content;margin-bottom:clamp(40px,5vw,72px)}
+.sg code{font-family:ui-monospace,Menlo,monospace;font-size:.88em;color:var(--workshirt)}
+.sg-head h1{color:var(--fleece);font-size:clamp(40px,5vw,76px);letter-spacing:-.04em;line-height:1}
+.sg-head h1 span{display:block;color:var(--wheat)}
+.sg-head p{margin-top:26px;max-width:38em;color:rgba(246,241,232,.82);font-size:clamp(16px,1.4vw,19px)}
+.sg-head .arcset{width:clamp(150px,15vw,240px)}
+@media (max-width:760px){.sg-head .arcset{display:none}}
+.sg-toc{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:36px;list-style:none}
+.sg-toc a{color:var(--fleece);font-size:14px;font-weight:500;text-decoration:none;border-bottom:1px solid rgba(246,241,232,.3);padding-bottom:3px}
+.sg-toc a:hover{border-color:var(--wheat);color:var(--wheat)}
+.sg-sec{padding:clamp(64px,8vw,120px) 0;border-top:1px solid var(--rule)}
+.sg-sec:nth-of-type(even){background:var(--fleece)}
+.sg-sec h2{font-size:clamp(30px,3.4vw,50px);letter-spacing:-.035em;line-height:1.05;margin-bottom:18px}
+.sg-sec h2 span{color:var(--brick)}
+.sg-intro{max-width:40em;font-size:17px;margin-bottom:clamp(32px,4vw,52px)}
+.sg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(20px,2.4vw,32px)}
+.sg-two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(32px,5vw,80px);align-items:start}
+@media (max-width:900px){.sg-two{grid-template-columns:1fr}}
+.sg-rules{list-style:none;border-top:1px solid var(--rule)}
+.sg-rules li{padding:14px 0 14px 26px;border-bottom:1px solid var(--rule);position:relative;font-size:15px;line-height:1.55}
+.sg-rules li::before{content:"";position:absolute;left:0;top:25px;width:14px;height:1.5px;background:var(--brick)}
+.sg-rules b{color:var(--bluestone)}
+.sg-sw{border:1px solid var(--rule);background:#fff}
+.sg-sw i{display:block;height:110px}
+.sg-sw div{padding:14px 16px 16px;font-size:13.5px;line-height:1.5}
+.sg-sw b{display:block;font-size:15px;color:var(--bluestone)}
+.sg-sw code,.sg-tok code{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;color:var(--workshirt)}
+.sg-panel{padding:clamp(24px,3vw,40px);border:1px solid var(--rule);background:#fff}
+.sg-panel.dark{background:var(--bluestone);border-color:var(--bluestone);color:rgba(246,241,232,.82)}
+.sg-panel.dark h3,.sg-panel.dark h2{color:var(--fleece)}
+.sg-panel.dark h2 span{color:var(--wheat)}
+.sg-cap{margin-top:14px;font-size:13px;color:var(--workshirt)}
+.sg-panel .btn{margin:0 10px 12px 0}
+/* photo frame demonstration, built from the same tokens as the site */
+.sg-frame{position:relative;height:clamp(360px,40vw,560px);background:var(--fleece);overflow:hidden}
+.sg-frame .ph{position:absolute;top:var(--frame-top);bottom:0;right:0;width:58%;border-top-left-radius:min(30vw,420px);overflow:hidden;outline:1px solid var(--frame-line);outline-offset:var(--frame-gap)}
+.sg-frame .ph img{width:calc(100%/.7);max-width:none;height:100%;object-fit:cover;object-position:0% 40%}
+.sg-frame .arcset{width:var(--sgw);left:calc(42% - var(--sgw)/2);--sgw:clamp(110px,13vw,190px)}
+.sg-frame .arcset::before{content:"";position:absolute;left:0;bottom:0;width:calc(var(--sgw)/2);height:calc(var(--sgw)*.88);background:radial-gradient(circle calc(var(--sgw)*.88) at 0 100%,var(--fleece) calc(100% - 1px),transparent 100%)}
+.sg-frame .note{position:absolute;left:clamp(20px,3vw,40px);top:clamp(28px,4vw,56px);max-width:36%;font-size:13.5px;line-height:1.55;color:var(--ink)}
+.sg-frame .note b{display:block;color:var(--bluestone);font-size:15px;margin-bottom:6px}
+.sg-arcs{display:flex;flex-wrap:wrap;gap:24px}
+.sg-arcs .box{position:relative;width:180px;height:180px;background:var(--bluestone);overflow:hidden}
+.sg-arcs .box.light{background:var(--fleece);border:1px solid var(--rule)}
+.sg-arcs .arcset{width:150px}
+.sg-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;list-style:none}
+@media (max-width:700px){.sg-cards{grid-template-columns:1fr}}
+.sg-cards li{border:1px solid var(--frame-blue);border-radius:0 var(--card-arch) 0 0;padding:clamp(18px,1.6vw,26px);min-height:150px;background:rgba(246,241,232,.06)}
+.sg-cards li small{display:block;font-size:var(--label-lg);font-weight:600;letter-spacing:.16em;color:var(--wheat);margin-bottom:22px}
+.sg-cards li b{display:block;color:var(--fleece);font-size:18px;font-weight:600;letter-spacing:-.02em}
+.sg-cards li span{display:block;margin-top:6px;font-size:13px;color:rgba(246,241,232,.7)}
+.sg-screen{margin:var(--frame-gap);background:#fff;border-radius:0 var(--screen-arch) 0 0;outline:1px solid var(--frame-blue-soft);outline-offset:var(--frame-gap);overflow:hidden;color:var(--bluestone)}
+.sg-screen .bar{background:var(--bluestone);color:var(--fleece);font-size:12px;font-weight:600;padding:11px 16px}
+.sg-screen .body{padding:22px 20px;font-size:14px}
+.sg-screen .body small{display:block;font-size:var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--brick);font-weight:600}
+.sg-tok{width:100%;border-collapse:collapse;font-size:14px;background:#fff;border:1px solid var(--rule)}
+.sg-tok th,.sg-tok td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+.sg-tok th{font-size:var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--brick);font-weight:600;background:var(--fleece)}
+.sg-tok td:first-child{white-space:nowrap}
+@media (max-width:700px){.sg-tok td:nth-child(3),.sg-tok th:nth-child(3){display:none}}
+.sg-type .h{font-size:clamp(34px,4vw,58px);letter-spacing:-.04em;line-height:1.02;color:var(--bluestone);font-weight:600}
+.sg-type .h span{display:block;color:var(--brick)}
+.sg-foot{background:var(--bluestone);color:rgba(246,241,232,.7);padding:40px 0;font-size:13.5px}
+</style>
+</head>
+<body class="sg">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<linearGradient id="apD" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E8673E"/><stop offset="1" stop-color="#A9533A"/></linearGradient>
+<linearGradient id="apSw" gradientUnits="userSpaceOnUse" x1="0" y1="31" x2="0" y2="73"><stop offset="0" stop-color="#D9A441"/><stop offset=".5" stop-color="#E8673E"/><stop offset="1" stop-color="#A9533A"/></linearGradient>
+<symbol id="ap-icon" viewBox="0 0 100 100"><clipPath id="apClip"><rect width="100" height="100"/></clipPath><rect width="100" height="100" shape-rendering="crispEdges" style="fill:var(--ait,#1B2A38)"/><g clip-path="url(#apClip)"><rect width="100" height="100" style="fill:none;stroke:var(--apk,none);stroke-width:var(--apkw,4.4px)"/></g><g transform="translate(45.266925 1) scale(0.83)"><circle cx="-21.0" cy="52.0" r="16.0" fill="none" style="stroke:var(--apm,#F6F1E8)" stroke-width="10"/><circle cx="27.4" cy="52.0" r="16.0" fill="none" style="stroke:var(--apm,#F6F1E8)" stroke-width="10"/><circle cx="53.20" cy="68.2" r="4.4" style="fill:var(--apd,url(#apD))"/></g><rect x="36.966925" y="26.73" width="8.3" height="34.86" shape-rendering="crispEdges" style="fill:var(--apm,#F6F1E8)"/><rect x="45.266925" y="26.73" width="5.312" height="34.86" shape-rendering="crispEdges" style="fill:var(--aps,url(#apSw))"/><rect x="50.578925" y="26.73" width="8.3" height="73.27" shape-rendering="crispEdges" style="fill:var(--apm,#F6F1E8)"/></symbol>
+</svg>
+
+<header class="sg-head">
+  <div class="wrap">
+    <a class="lk dark" href="index.html" aria-label="Advice Prosperity, home"><svg class="ic" viewBox="0 0 100 100" aria-hidden="true"><use href="#ap-icon"/></svg><span class="wd"><b>Advice</b><br>Prosperity</span></a>
+    <div class="eyebrow light">Website style guide</div>
+    <h1>One set of rules.<span>Every page follows.</span></h1>
+    <p>For everyone building adviceprosperity.com.au.<br>Every sample on this page is drawn by the site&rsquo;s own stylesheet, so it always matches the live site.</p>
+    <ul class="sg-toc">
+      <li><a href="#how">How it works</a></li><li><a href="#colour">Colour</a></li><li><a href="#type">Type</a></li><li><a href="#buttons">Buttons</a></li>
+      <li><a href="#frames">Photo frames</a></li><li><a href="#arcs">The Arc</a></li><li><a href="#cards">Cards and screens</a></li><li><a href="#nav">Navigation</a></li><li><a href="#tokens">Tokens</a></li>
+    </ul>
+  </div>
+  <div class="arcset br g-brass-maple"><div class="arc ring o-br"></div><div class="arc ring o-br"></div><div class="arc o-br"></div></div>
+</header>
+
+<main>
+<section class="sg-sec" id="how"><div class="wrap sg-two">
+  <div>
+    <div class="eyebrow">How it works</div>
+    <h2>Change it once.<br><span>It changes everywhere.</span></h2>
+    <p class="sg-intro">All styling lives in <code>assets/site.css</code>. The original build sits at the top. The AP visual design system sits below it and opens with the design tokens: the named sizes, colours and shapes used throughout. Every page shares the one stylesheet.</p>
+  </div>
+  <ul class="sg-rules">
+    <li><b>Use a token, not a new number.</b> Photo frames, card corners, label sizes and frame colours each have a token. Adjust the token and every page follows.</li>
+    <li><b>Placements and copy belong to the build.</b> Styling never moves, removes or reorders a section, heading or tagline.</li>
+    <li><b>New photo, same frame.</b> Any large photo uses the photo frame below. Do not invent a new shape.</li>
+    <li><b>Changes go through review.</b> Work on a <code>dana/&hellip;</code> branch and open a pull request. The <code>main</code> branch is the live site.</li>
+  </ul>
+</div></section>
+
+<section class="sg-sec" id="colour"><div class="wrap">
+  <div class="eyebrow">Colour</div>
+  <h2>The AP palette.<br><span>Each colour has a job.</span></h2>
+  <p class="sg-intro">From the master brand guidelines. Maple and Brass are kept for the Arc. Photographs are never tinted.</p>
+  <div class="sg-grid">
+    <div class="sg-sw"><i style="background:var(--bluestone)"></i><div><b>Bluestone</b><code>#1B2A38 &middot; --bluestone</code><br>Dark grounds, headings, the header over the cover.</div></div>
+    <div class="sg-sw"><i style="background:var(--brick)"></i><div><b>Brick</b><code>#A9533A &middot; --brick</code><br>Primary buttons, eyebrow lines and the second line of headings on light grounds.</div></div>
+    <div class="sg-sw"><i style="background:var(--ledger)"></i><div><b>Ledger</b><code>#3D4E42 &middot; --ledger</code><br>The approval card header and status marks.</div></div>
+    <div class="sg-sw"><i style="background:var(--workshirt)"></i><div><b>Workshirt</b><code>#56718E &middot; --workshirt</code><br>Supporting text and labels on light grounds.</div></div>
+    <div class="sg-sw"><i style="background:var(--overcast)"></i><div><b>Overcast</b><code>#A8C0D2 &middot; --overcast</code><br>AP light blue. Markers on dark grounds, card and screen frames.</div></div>
+    <div class="sg-sw"><i style="background:var(--wheat)"></i><div><b>Wheat</b><code>#C8AE86 &middot; --wheat</code><br>Second line of headings on dark grounds; photo frame lines.</div></div>
+    <div class="sg-sw"><i style="background:var(--fleece)"></i><div><b>Fleece</b><code>#F6F1E8 &middot; --fleece</code><br>Light grounds and text on Bluestone.</div></div>
+    <div class="sg-sw"><i style="background:linear-gradient(90deg,var(--brass),var(--maple))"></i><div><b>Brass and Maple</b><code>#D9A441 &middot; #E8673E</code><br>The Arc only.</div></div>
+  </div>
+</div></section>
+
+<section class="sg-sec" id="type"><div class="wrap sg-two">
+  <div class="sg-type">
+    <div class="eyebrow">Type</div>
+    <div class="h">Headings in two colours.<span>The second line carries the point.</span></div>
+    <p class="lede" style="margin-top:26px">Sora throughout. Headings are set tight, in Bluestone with the second line in Brick on light grounds, or in Fleece and Wheat on dark grounds.</p>
+    <div class="sg-panel dark" style="margin-top:32px">
+      <div class="eyebrow light">On a dark ground</div>
+      <h2 style="margin:0">Less admin.<span style="display:block">More time to grow.</span></h2>
+    </div>
+  </div>
+  <ul class="sg-rules">
+    <li><b>Eyebrows</b> (the small uppercase label over a heading) use <code>--label</code>, with a fine line marker: Brick on light grounds, Overcast on dark.</li>
+    <li><b>Card numbers and chapter labels</b> use <code>--label-lg</code>.</li>
+    <li><b>One sentence, one line.</b> When a short lead, caption or call to action holds two sentences, the second starts on a new line.<br><span style="display:block;margin-top:10px;padding:12px 14px;background:var(--fleece);color:var(--bluestone)">Give your clients back their adviser.<br>Book 30 minutes and we&rsquo;ll walk a client through the system.</span></li>
+    <li><b>Line breaks never change the wording.</b> They are added with a break in the HTML, or a new line in the script for animated captions.</li>
+  </ul>
+</div></section>
+
+<section class="sg-sec" id="buttons"><div class="wrap">
+  <div class="eyebrow">Buttons</div>
+  <h2>Round buttons<br><span>with a small arrow.</span></h2>
+  <p class="sg-intro">Every call to action is a fully rounded button. The arrow nudges forward on hover. On the cover and other dark grounds the primary button is Brick and turns Fleece on hover.</p>
+  <div class="sg-grid">
+    <div class="sg-panel"><a class="btn" href="#buttons">Book a demo</a><a class="btn ghost" href="#buttons">See where the time goes</a><a class="btn dark sm" href="#buttons">Book a demo</a><p class="sg-cap">Light grounds: Brick primary, Bluestone outline, small Bluestone for the header.</p></div>
+    <div class="sg-panel dark"><a class="btn on-dark" href="#buttons">Book a demo</a><a class="btn" href="#buttons">Book a demo</a><p class="sg-cap" style="color:rgba(246,241,232,.7)">Dark grounds: Fleece or Brick.</p></div>
+  </div>
+</div></section>
+
+<section class="sg-sec" id="frames"><div class="wrap">
+  <div class="eyebrow">Photo frames</div>
+  <h2>Every large photo<br><span>sits in the same frame.</span></h2>
+  <p class="sg-intro">One arched corner turned towards the text, straight edges everywhere else, and a thin line just outside the photo.</p>
+  <div class="sg-frame">
+    <div class="note"><b>The frame</b>Photo starts at <code>--frame-top</code> and runs to the bottom of the section. The thin line sits <code>--frame-gap</code> outside the photo. Where the Arc meets the line, the line stops just behind the Arc&rsquo;s outer ring.</div>
+    <div class="ph"><img src="assets/photos/p15.webp" alt="A client smiling with her adviser across the meeting table" loading="lazy"></div>
+    <div class="arcset bl"><div class="arc ring o-bl g-brass-maple"></div><div class="arc ring o-bl"></div><div class="arc o-bl g-overcast-workshirt"></div></div>
+  </div>
+  <ul class="sg-rules" style="margin-top:clamp(32px,4vw,52px)">
+    <li><b>Line colour:</b> <code>--frame-line</code> (Wheat) on light grounds, <code>--frame-line-dark</code> on Bluestone, Overcast on the Brick quote card.</li>
+    <li><b>Height:</b> photos may run wider to balance a section, but not higher than the frame. Every frame starts at <code>--frame-top</code>.</li>
+    <li><b>Natural photography only.</b> No overlays, gradients, tints or filters on photos. People across the table, not landscapes or regional imagery.</li>
+    <li><b>Crop for people.</b> Give faces headroom, centre the main subject in the frame, and crop out stray hands or sleeves at the edges.</li>
+  </ul>
+</div></section>
+
+<section class="sg-sec" id="arcs"><div class="wrap sg-two">
+  <div>
+    <div class="eyebrow">The Arc</div>
+    <h2>Anchored to a corner.<br><span>Never floating.</span></h2>
+    <p class="sg-intro">Three rings from the brand guide. The Arc sits in a corner of a photo frame or panel: bottom left, bottom right or top right.</p>
+    <div class="sg-arcs">
+      <div class="box"><div class="arcset br g-brass-maple"><div class="arc ring o-br"></div><div class="arc ring o-br"></div><div class="arc o-br"></div></div></div>
+      <div class="box light"><div class="arcset bl"><div class="arc ring o-bl g-brass-maple"></div><div class="arc ring o-bl"></div><div class="arc o-bl g-overcast-workshirt"></div></div></div>
+      <div class="box"><div class="arcset tr g-overcast-workshirt"><div class="arc ring o-tr"></div><div class="arc ring o-tr"></div><div class="arc o-tr"></div></div></div>
+    </div>
+  </div>
+  <ul class="sg-rules">
+    <li><b>One Arc per section</b>, sized to the section, roughly 11 to 15 percent of the screen width.</li>
+    <li><b>Brass to Maple</b> is the lead colourway. Overcast to Workshirt is the cool alternative on Brick or blue grounds.</li>
+    <li><b>Meeting a frame line:</b> the line ends just behind the outer ring, or the Arc tucks behind the Bluestone edge so it appears to run behind it.</li>
+    <li><b>On phones</b> the Arcs on photo bands are hidden to keep photos clear.</li>
+  </ul>
+</div></section>
+
+<section class="sg-sec" id="cards"><div class="wrap">
+  <div class="eyebrow">Cards and screens</div>
+  <h2>The AP card shape.<br><span>Square corners, top right rounded.</span></h2>
+  <p class="sg-intro">Cards, panels and product screens share the shape of the photo frames. On dark grounds their frames are drawn in Overcast, the AP light blue.</p>
+  <div class="sg-two">
+    <div class="sg-panel dark">
+      <ol class="sg-cards">
+        <li><small>01</small><b>Discovery</b><span>File note prepared from the meeting</span></li>
+        <li><small>02</small><b>Fact find</b><span>Filled from what was said and filed</span></li>
+        <li><small>03</small><b>Strategy</b><span>Strategy paper prepared</span></li>
+      </ol>
+      <p class="sg-cap" style="color:rgba(246,241,232,.7)">Numbered cards: <code style="color:var(--overcast)">--frame-blue</code> border, <code style="color:var(--overcast)">--card-arch</code> corner, numbers in <code style="color:var(--overcast)">--label-lg</code>.</p>
+    </div>
+    <div class="sg-panel dark">
+      <div class="sg-screen"><div class="bar">Advice Prosperity</div><div class="body"><small>Spencer family</small><b style="font-size:19px">Fact find</b><p style="margin-top:8px;color:var(--workshirt)">Product screens sit in a soft Overcast frame with the same rounded top right.</p></div></div>
+      <p class="sg-cap" style="color:rgba(246,241,232,.7);margin-top:calc(var(--frame-gap) + 14px)"><code style="color:var(--overcast)">--screen-arch</code> corner, <code style="color:var(--overcast)">--frame-blue-soft</code> frame.</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="sg-sec" id="nav"><div class="wrap sg-two">
+  <div>
+    <div class="eyebrow">Navigation</div>
+    <h2>A calm header<br><span>that stays out of the way.</span></h2>
+    <p class="sg-intro">The header you see at the top of every page. It is Bluestone over the homepage cover and settles to Fleece as the page scrolls.</p>
+  </div>
+  <ul class="sg-rules">
+    <li><b>Links</b> in Sora 500. A fine Brick line sweeps in under a link on hover and stays under the current page.</li>
+    <li><b>A hairline divider</b> separates the links from Book a demo.</li>
+    <li><b>Book a demo</b> is always the last item, a round button with an arrow that never wraps.</li>
+    <li><b>The Product menu</b> opens in the AP card shape, each item marked with a short Brick line.</li>
+  </ul>
+</div></section>
+
+<section class="sg-sec" id="tokens"><div class="wrap">
+  <div class="eyebrow">Tokens</div>
+  <h2>The named values.<br><span>Read live from the stylesheet.</span></h2>
+  <p class="sg-intro">These are set once at the top of the design system in <code>assets/site.css</code>. The values below are read from the stylesheet as this page loads.</p>
+  <table class="sg-tok"><thead><tr><th>Token</th><th>Live value</th><th>Used for</th></tr></thead><tbody id="tokRows">
+    <tr data-t="--frame-line"><td><code>--frame-line</code></td><td></td><td>Thin line around large photos on light grounds</td></tr>
+    <tr data-t="--frame-line-dark"><td><code>--frame-line-dark</code></td><td></td><td>The same line on Bluestone</td></tr>
+    <tr data-t="--frame-gap"><td><code>--frame-gap</code></td><td></td><td>Space between a photo or screen and its line</td></tr>
+    <tr data-t="--frame-top"><td><code>--frame-top</code></td><td></td><td>Where photo frames start below the section top</td></tr>
+    <tr data-t="--frame-blue"><td><code>--frame-blue</code></td><td></td><td>Overcast border on numbered cards</td></tr>
+    <tr data-t="--frame-blue-soft"><td><code>--frame-blue-soft</code></td><td></td><td>Overcast frame around product screens</td></tr>
+    <tr data-t="--card-arch"><td><code>--card-arch</code></td><td></td><td>Rounded top-right corner of cards</td></tr>
+    <tr data-t="--screen-arch"><td><code>--screen-arch</code></td><td></td><td>Rounded top-right corner of product screens</td></tr>
+    <tr data-t="--panel-arch"><td><code>--panel-arch</code></td><td></td><td>Curves on the Microsoft 365 panel</td></tr>
+    <tr data-t="--label"><td><code>--label</code></td><td></td><td>Eyebrows and small uppercase labels</td></tr>
+    <tr data-t="--label-lg"><td><code>--label-lg</code></td><td></td><td>Card numbers and chapter labels</td></tr>
+    <tr data-t="--band-arc"><td><code>--band-arc</code></td><td></td><td>Width of the Arc on the For your clients photo</td></tr>
+    <tr data-t="--band-arc-ring"><td><code>--band-arc-ring</code></td><td></td><td>Its outer ring, where the frame line stops</td></tr>
+  </tbody></table>
+</div></section>
+</main>
+
+<footer class="sg-foot"><div class="wrap">Advice Prosperity &middot; Website style guide &middot; Reference page, not linked from the site</div></footer>
+
+<script src="assets/site.js"></script>
+<script>
+(function(){var cs=getComputedStyle(document.documentElement);document.querySelectorAll('#tokRows tr').forEach(function(r){var v=cs.getPropertyValue(r.dataset.t).trim();var c=r.children[1];c.innerHTML='<code></code>';c.firstChild.textContent=v;if(/^(rgba?|#)/.test(v)){var s=document.createElement('i');s.style.cssText='display:inline-block;width:14px;height:14px;margin-left:8px;vertical-align:-2px;border:1px solid var(--rule);background:'+v;c.appendChild(s)}})})();
+</script>
+</body>
+</html>
