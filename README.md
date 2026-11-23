@@ -1,3 +1,3 @@
 # Advice Prosperity concept homepage
 
-Concept prototype for internal review. Not a live site.
+Live at https://adviceprosperity.com.au (GitHub Pages, custom domain in CNAME; DNS in Regional Prosperity's Cloudflare).
