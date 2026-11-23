@@ -629,6 +629,7 @@ footer .wrap{display:block}
   --card-arch:clamp(36px,3.4vw,56px);        /* numbered step cards */
   --screen-arch:clamp(28px,2.6vw,44px);      /* product screens */
   --panel-arch:clamp(48px,5.4vw,90px);       /* Microsoft 365 panel */
+  --stage-arch:clamp(90px,11vw,200px);       /* large Bluestone stages and feature cards */
   /* small uppercase labels: eyebrows, card labels, card numbers */
   --label:12.85px;
   --label-lg:13.35px;
@@ -880,7 +881,7 @@ p,li,dd,figcaption,blockquote,.lede{text-wrap:pretty}
   .bn-stage{min-height:400px}
   .bn-note{bottom:10px;font-size:11px}
 }
-.bn-stage{position:relative;background:radial-gradient(90% 120% at 100% 0%,#263B50 0%,rgba(38,59,80,0) 60%),var(--bluestone);color:var(--fleece);margin-top:clamp(26px,4.5vh,56px);border-radius:0 clamp(90px,11vw,200px) 0 0}
+.bn-stage{position:relative;background:radial-gradient(90% 120% at 100% 0%,#263B50 0%,rgba(38,59,80,0) 60%),var(--bluestone);color:var(--fleece);margin-top:clamp(26px,4.5vh,56px);border-radius:0 var(--stage-arch) 0 0}
 @media (max-width:899px){
   .bn-stage{border-radius:0 72px 0 0}
   .bn-lk{display:none}
@@ -1120,6 +1121,128 @@ body:has(.hero) .walk .win{border-color:transparent;box-shadow:0 70px 120px -50p
 }
 @media (min-width:901px){.phero-photo{top:clamp(32px,4vw,56px)}}
 .pbreak{position:relative;overflow:hidden;background:var(--fleece);padding-top:clamp(30px,3.2vw,48px)}
+
+/* ---------- Product pages: Run your practice, Prepare advice ---------- */
+/* one template for both: a Bluestone opening, each screen on a framed Bluestone stage,
+   AP cards for the three points, and the cross-link as a framed card */
+body:has(.phero):has(.walk.inner):not(:has(.pp-bento)) .phero{background:radial-gradient(70% 60% at 85% 0%,#24394D 0%,rgba(36,57,77,0) 70%),var(--bluestone);min-height:min(80vh,720px)}
+body:has(.phero):has(.walk.inner):not(:has(.pp-bento)) .phero h1{color:var(--fleece);font-size:clamp(40px,4vw,64px)}
+body:has(.phero):has(.walk.inner):not(:has(.pp-bento)) .phero h1 span{color:var(--wheat)}
+body:has(.phero):has(.walk.inner):not(:has(.pp-bento)) .phero .eyebrow{color:var(--wheat)}
+body:has(.phero):has(.walk.inner):not(:has(.pp-bento)) .phero .eyebrow::before{background:var(--overcast)}
+body:has(.phero):has(.walk.inner):not(:has(.pp-bento)) .phero .lede{color:rgba(246,241,232,.82)}
+body:has(.phero):has(.walk.inner):not(:has(.pp-bento)) .phero .btn:hover{background:var(--fleece);border-color:var(--fleece);color:var(--bluestone)}
+body:has(.phero):has(.walk.inner):not(:has(.pp-bento)) .phero .btn.ghost{color:var(--fleece);border-color:rgba(246,241,232,.55)}
+body:has(.phero):has(.walk.inner):not(:has(.pp-bento)) .phero .btn.ghost:hover{background:var(--fleece);border-color:var(--fleece);color:var(--bluestone)}
+body:has(.phero):has(.walk.inner):not(:has(.pp-bento)) .phero-photo{background:var(--deep);outline-color:var(--frame-line-dark)}
+body:has(.phero):has(.walk.inner):not(:has(.pp-bento)) .phero :focus-visible{outline-color:var(--wheat)}
+@media (min-width:901px){
+  body:has(.phero):has(.walk.inner):not(:has(.pp-bento)) .phero-photo{top:var(--frame-top);width:44%;border-top-left-radius:min(30vw,460px)}
+  body:has(.phero):has(.walk.inner):not(:has(.pp-bento)) .phero-tx{width:50%}
+  body:has(.phero):has(.walk.inner):not(:has(.pp-bento)) .phero>.arcset{left:auto;right:0;bottom:0;width:clamp(150px,15vw,240px)}
+}
+/* chapters: each product screen sits on a framed Bluestone stage in the AP card shape */
+body:has(.phero):has(.walk.inner) .walk.inner{background:var(--lace)}
+body:has(.phero):has(.walk.inner) .chap-ui{--stage-pad:clamp(20px,2.4vw,40px);padding:var(--stage-pad);background:radial-gradient(80% 70% at 100% 0%,#24394D 0%,rgba(36,57,77,0) 70%),var(--bluestone);border-radius:0 calc(var(--screen-arch) + var(--stage-pad)) 0 0;outline:1px solid var(--frame-line);outline-offset:var(--frame-gap);box-shadow:0 60px 100px -60px rgba(17,28,38,.6)}
+body:has(.phero):has(.walk.inner) .chap-ui .win{outline-color:var(--frame-blue-soft);border-color:transparent;box-shadow:0 50px 90px -40px rgba(0,0,0,.6)}
+body:has(.phero):has(.walk.inner) .chap-ui .walk-note{position:relative;z-index:1;text-align:right;color:rgba(246,241,232,.6);margin-top:calc(var(--frame-gap) + 12px)}
+body:has(.phero):has(.walk.inner) .kb{grid-template-columns:repeat(6,minmax(92px,1fr));gap:8px;padding:12px}
+body:has(.phero):has(.walk.inner) .kb .col h4{white-space:normal}
+@media (min-width:901px){body:has(.phero):has(.walk.inner) .chap{grid-template-columns:minmax(0,.6fr) minmax(0,1.4fr)}}
+@media (max-width:900px){body:has(.phero):has(.walk.inner) .chap-ui{--stage-pad:22px;outline-offset:10px}}
+@media (max-width:560px){body:has(.phero):has(.walk.inner) .chap-ui{--stage-pad:12px;outline-offset:8px}body:has(.phero):has(.walk.inner) .chap-ui .win{outline-offset:6px}}
+/* photo break: starts at the same height as every other frame */
+body:has(.phero):has(.walk.inner) .pbreak{padding-top:var(--frame-top);background:var(--lace)}
+/* three points become AP cards with Overcast frames and numbers */
+body:has(.phero):has(.walk.inner) .sec.dark{background:radial-gradient(60% 70% at 0% 100%,#24394D 0%,rgba(36,57,77,0) 70%),var(--bluestone)}
+body:has(.phero):has(.walk.inner) .pts{counter-reset:pt;gap:14px;border-top:0}
+body:has(.phero):has(.walk.inner) .pts>div{counter-increment:pt;padding:clamp(22px,2.2vw,32px)!important;border:1px solid var(--frame-blue);border-radius:0 var(--card-arch) 0 0;background:rgba(246,241,232,.04);min-height:clamp(190px,16vw,240px)}
+body:has(.phero):has(.walk.inner) .pts>div::before{content:counter(pt,decimal-leading-zero);display:block;font-size:var(--label-lg);font-weight:600;letter-spacing:.16em;color:var(--wheat);margin-bottom:clamp(22px,3vw,40px)}
+body:has(.phero):has(.walk.inner) .pts b{font-size:clamp(19px,1.6vw,22px)}
+@media (max-width:760px){body:has(.phero):has(.walk.inner) .pts>div{min-height:0;border-bottom:1px solid var(--frame-blue)}}
+/* cross-link: a framed white card in the AP shape */
+body:has(.phero):has(.walk.inner) .sec:has(.xlink){background:var(--lace)}
+body:has(.phero):has(.walk.inner) .xlink{position:relative;background:#fff;padding:clamp(34px,5vw,72px);border-radius:0 var(--stage-arch) 0 0;outline:1px solid var(--frame-line);outline-offset:var(--frame-gap);box-shadow:0 50px 90px -60px rgba(17,28,38,.45);gap:28px 48px}
+body:has(.phero):has(.walk.inner) .xlink h3{font-size:clamp(24px,2.5vw,36px);letter-spacing:-.03em;line-height:1.12;max-width:18em}
+body:has(.phero):has(.walk.inner) .xlink h3::before{content:"";display:block;width:26px;height:2px;background:var(--brick);margin-bottom:22px}
+body:has(.phero):has(.walk.inner) .xlink p{font-size:clamp(15.5px,1.3vw,18px);margin-top:14px}
+@media (max-width:900px){body:has(.phero):has(.walk.inner) .xlink{border-radius:0 72px 0 0;outline-offset:10px}}
+
+/* product page details */
+/* Run your practice opening: light, with the photo arched top right and two product tiles beside it (a bento layout, unlike the cover) */
+body:has(.pp-bento) .phero{background:radial-gradient(60% 80% at 100% 0%,var(--lace) 0%,rgba(253,251,248,0) 70%),var(--fleece);min-height:min(88vh,800px)}
+body:has(.pp-bento) .phero h1{font-size:clamp(40px,4.4vw,70px)}
+body:has(.pp-bento) .phero .eyebrow::before{display:inline-block}
+.pp-tile{position:relative;overflow:hidden;border-radius:0 var(--card-arch) 0 0}
+.pp-stats{display:flex;flex-direction:column;justify-content:space-between;gap:18px;padding:clamp(20px,2vw,30px);background:radial-gradient(rgba(246,241,232,.07) 1px,transparent 1.5px) 0 0/20px 20px,radial-gradient(90% 70% at 100% 0%,#24394D 0%,rgba(36,57,77,0) 70%),var(--bluestone);color:var(--fleece);box-shadow:0 40px 70px -40px rgba(17,28,38,.6)}
+.pp-stats small{display:flex;align-items:center;gap:10px;white-space:nowrap;font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--overcast)}
+.pp-stats small::before{content:"";width:18px;height:1.5px;background:var(--overcast)}
+.pp-stats div{padding-top:14px;border-top:1px solid rgba(246,241,232,.14)}
+.pp-stats b{display:block;font-size:clamp(28px,2.6vw,42px);font-weight:600;letter-spacing:-.035em;line-height:1;color:var(--wheat);font-variant-numeric:tabular-nums lining-nums}
+.pp-stats span{display:block;margin-top:8px;font-size:14px;color:rgba(246,241,232,.72)}
+.pp-appr{background:#fff;color:var(--bluestone);box-shadow:0 40px 70px -40px rgba(17,28,38,.45),0 0 0 1px rgba(27,42,56,.08)}
+.pp-appr-hd{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 16px;background:var(--ledger);color:var(--fleece);font-size:13px;font-weight:600}
+.pp-appr-hd em{font-style:normal;font-weight:500;color:rgba(246,241,232,.72);white-space:nowrap}
+.pp-day-r{display:grid;grid-template-columns:48px minmax(0,1fr);gap:10px;padding:12px 16px;border-bottom:1px solid var(--rule);font-size:14px;font-weight:600;line-height:1.35}
+.pp-day-r:last-child{border-bottom:0}
+.pp-day-r b{font-weight:600;color:var(--brick);font-variant-numeric:tabular-nums lining-nums}
+.pp-day-r small{display:block;font-size:12.5px;font-weight:400;color:var(--workshirt)}
+.pp-appr-r{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--rule);font-size:13px;font-weight:600}
+.pp-appr-r:last-child{border-bottom:0}
+.pp-appr-r small{display:block;font-size:11.5px;font-weight:400;color:var(--workshirt)}
+.pp-appr-r i{font-style:normal;font-size:11px;font-weight:600;padding:6px 12px;border-radius:999px;background:var(--bluestone);color:var(--fleece)}
+.pp-appr-r:first-of-type i{background:var(--ledger)}
+@media (min-width:901px){
+  body:has(.pp-bento) .phero-tx{width:34%}
+  body:has(.pp-bento) .phero-photo{top:var(--frame-top);bottom:var(--frame-top);right:var(--wide-edge);width:calc((100% - 2*var(--wide-edge))*.36);border-radius:0 min(14vw,230px) 0 0;outline:none}
+  .pp-bento{position:absolute;z-index:3;top:var(--frame-top);bottom:var(--frame-top);right:calc(var(--wide-edge) + (100% - 2*var(--wide-edge))*.36 + clamp(36px,3.6vw,56px));width:clamp(240px,19vw,300px);display:grid;grid-template-rows:minmax(0,1fr) auto;gap:clamp(16px,1.6vw,24px)}
+  body:has(.pp-bento) .phero>.pp-hero-arc{right:var(--wide-edge);bottom:var(--frame-top);left:auto;width:clamp(110px,10vw,170px);z-index:4}
+  /* trial: one thin frame line encloses the tiles and the photo, its top-right curve in step with the photo's arch */
+  body:has(.pp-bento) .phero::before{content:"";position:absolute;z-index:1;pointer-events:none;top:calc(var(--frame-top) - var(--frame-gap));bottom:calc(var(--frame-top) - var(--frame-gap));left:calc(100% - var(--wide-edge) - (100% - 2*var(--wide-edge))*.36 - clamp(36px,3.6vw,56px) - clamp(240px,19vw,300px) - var(--frame-gap));right:calc(var(--wide-edge) - var(--frame-gap));border:1px solid var(--frame-line);border-radius:0 calc(min(14vw,230px) + var(--frame-gap)) 0 0}
+}
+@media (min-width:901px) and (max-width:1180px){body:has(.pp-bento) .phero-tx{width:33%}body:has(.pp-bento) .phero-photo{width:28%}.pp-bento{width:236px;right:calc(var(--wide-edge) + 28% + 32px)}body:has(.pp-bento) .phero::before{left:calc(100% - var(--wide-edge) - 28% - 32px - 236px - var(--frame-gap))}.pp-appr-r small{display:none}.pp-stats small{white-space:normal}.pp-appr-hd span{font-size:11px}}
+@media (max-width:900px){
+  body:has(.pp-bento) .phero-photo{margin:0 14% 0 0;border-radius:0 46vw 0 0;aspect-ratio:4/5}
+  .pp-bento{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin:24px 0 44px;padding-inline:var(--gutter)}
+  .pp-tile{border-radius:0 32px 0 0}
+  .pp-appr-r{padding:10px 12px}.pp-appr-r small{display:none}.pp-appr-hd{padding:10px 12px}
+  body:has(.pp-bento) .phero>.pp-hero-arc{display:none}
+}
+@media (max-width:520px){.pp-bento{grid-template-columns:1fr}}
+/* chapters: a fine dot grid on each stage, and an Arc tucked under each screen */
+body:has(.phero):has(.walk.inner) .chap-ui{background:radial-gradient(rgba(246,241,232,.07) 1px,transparent 1.5px) 0 0/22px 22px,radial-gradient(80% 70% at 100% 0%,#24394D 0%,rgba(36,57,77,0) 70%),var(--bluestone)}
+body:has(.phero):has(.walk.inner) .chap-ui .win{position:relative;z-index:1}
+.pp-arc{width:clamp(96px,9vw,150px);z-index:0}
+/* photo break: the Regional Prosperity award as a card on the photo */
+.pp-award{position:absolute;z-index:3;right:calc(max(0px,(100% - 1440px)/2) + clamp(24px,3vw,56px));bottom:clamp(20px,2.4vw,36px);width:min(27vw,340px);padding:clamp(24px,2.6vw,36px);background:var(--lace);color:var(--bluestone);border-radius:0 var(--card-arch) 0 0;box-shadow:0 44px 80px -30px rgba(8,14,20,.55)}
+.pp-award-k{display:flex;align-items:center;gap:12px;font-size:var(--label);font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--brick)}
+.pp-award-k::before{content:"";width:26px;height:2px;background:var(--brick)}
+.pp-award b{display:block;margin-top:18px;font-size:clamp(24px,2.3vw,34px);font-weight:600;letter-spacing:-.035em;line-height:1.05}
+.pp-award-s{display:block;margin-top:8px;font-size:14px;color:var(--workshirt)}
+.pp-award a{display:inline-block;margin-top:20px;font-size:14px;font-weight:600;color:var(--bluestone);text-decoration:none;border-bottom:1px solid var(--brick);padding-bottom:2px}
+.pp-award a::after{content:" \2192"}
+.pp-award a:hover{color:var(--brick)}
+@media (max-width:900px){.pp-award{position:relative;right:auto;bottom:auto;width:auto;margin:-48px var(--gutter) 0 calc(var(--gutter) + 8%)}}
+/* set up round your practice: a framed photo beside the heading */
+.pp-ph{overflow:hidden;background:var(--deep);border-top-left-radius:min(20vw,300px);outline:1px solid var(--frame-line-dark);outline-offset:var(--frame-gap);aspect-ratio:4/3}
+.pp-ph img{width:100%;height:100%;object-fit:cover;object-position:45% center}
+@media (min-width:901px){
+  body:has(.pp-ph) .sec.dark .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);column-gap:clamp(40px,6vw,96px);align-items:center}
+  body:has(.pp-ph) .sec.dark .sec-head{grid-column:1;grid-row:1}
+  .pp-ph{grid-column:2;grid-row:1;margin-bottom:clamp(30px,4vw,56px)}
+  body:has(.pp-ph) .sec.dark .pts{grid-column:1/-1;grid-row:2}
+}
+@media (max-width:900px){.pp-ph{margin:0 0 44px 14%;border-top-left-radius:40vw}}
+/* cross-link card: the documents it prepares as small AP chips */
+body:has(.phero):has(.walk.inner) .xlink{overflow:hidden;align-items:flex-end}
+.pp-xcta{display:flex;flex-direction:column;align-items:center;gap:clamp(30px,3vw,44px)}
+.pp-xic{outline:1px solid var(--bluestone);outline-offset:7px;--ait:var(--brick);--apd:var(--wheat);--aps:var(--wheat);width:clamp(76px,6.4vw,104px);height:auto;aspect-ratio:1/1}
+.pp-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;list-style:none}
+.pp-chips li{display:inline-flex;align-items:center;gap:8px;padding:8px 16px 8px 12px;font-size:12.5px;font-weight:600;color:var(--bluestone);background:var(--fleece);border:1px solid var(--rule);border-radius:0 14px 0 0}
+.pp-chips li::before{content:"";width:10px;height:1.5px;background:var(--brick)}
+
+/* inner pages: the closing photo fills its frame (the shift right is for Kane's photo on the homepage) */
+@media (min-width:901px){body:not(:has(.hero)) .close-ph .ph img{translate:0 0;width:100%;object-position:35% 40%}}
 
 /* ---------- Footer ---------- */
 .ft-top{padding:clamp(44px,5vw,64px) 0 clamp(32px,4vw,44px)}
