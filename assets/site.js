@@ -96,7 +96,7 @@
   var bn=d.getElementById('bottleneck'),grid=d.getElementById('bnGrid'),nEl=d.getElementById('bnN'),wEl=d.getElementById('bnW');
   var days=[['Discovery meeting',1],['File note typed up',0],['Fact find keyed in again',0],['Strategy worked through',1],['SOA request written and emailed',0]];
   for(var q=0;q<13;q++)days.push(['In the paraplanning queue',0]);
-  days.push(['Draft back. Checked and changed',1],['Waiting on a meeting time',0],['Advice presented',1]);
+  days.push(['Draft back.\nChecked and changed',1],['Waiting on a meeting time',0],['Advice presented',1]);
   var cells=days.map(function(x){var i=d.createElement('i');if(!x[1])i.className='wait';grid.appendChild(i);return i});
   var lastDay=-1,lastPhase='';
   function bnState(){
@@ -104,7 +104,7 @@
     var phase=p<.5?'1':p<.74?'2':'3';
     var day=phase==='1'?Math.max(1,Math.min(21,Math.ceil(p/.48*21))):21;
     if(day!==lastDay){lastDay=day;nEl.textContent=day;wEl.textContent=days[day-1][0];cells.forEach(function(c,i){c.classList.toggle('on',i<day)})}
-    if(phase!==lastPhase){lastPhase=phase;bn.dataset.phase=phase;if(phase==='2')wEl.textContent='4 days of advice. 17 days of everything else.'; else if(phase==='1')wEl.textContent=days[day-1][0]}
+    if(phase!==lastPhase){lastPhase=phase;bn.dataset.phase=phase;if(phase==='2')wEl.textContent='4 days of advice.\n17 days of everything else.'; else if(phase==='1')wEl.textContent=days[day-1][0]}
   }
   var tick=false;
   addEventListener('scroll',function(){if(tick)return;tick=true;requestAnimationFrame(function(){tick=false;bnState()})},{passive:true});
