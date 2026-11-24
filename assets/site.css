@@ -1336,6 +1336,65 @@ body:has(.pp-prep):has(.walk.inner):has(.phero) .chap-ui{background:radial-gradi
 }
 @media (max-width:900px){.pp-trail{margin-bottom:40px}}
 
+/* ---------- Book a demo page ---------- */
+/* the whole page becomes a Bluestone stage: glows, a fine dot grid, a large Arc and the AP monogram as backdrop */
+.demo{position:relative;overflow:hidden;overflow:clip;color:rgba(246,241,232,.82);padding:clamp(64px,8vw,120px) 0 clamp(80px,9vw,140px);background:radial-gradient(55% 60% at 100% 0%,#2C4258 0%,rgba(44,66,88,0) 70%),radial-gradient(45% 55% at 0% 100%,#24394D 0%,rgba(36,57,77,0) 70%),var(--bluestone)}
+.demo .wrap{position:relative;z-index:2;max-width:none;padding-inline:var(--wide-edge);grid-template-columns:minmax(0,1fr) minmax(0,.92fr);gap:clamp(40px,7vw,120px)}
+.dm-arc{z-index:1;width:clamp(180px,22vw,340px);opacity:.95}
+.dm-mark{position:absolute;z-index:1;left:calc(var(--wide-edge) - 4vw);bottom:-6vw;width:clamp(240px,30vw,460px);height:auto;opacity:.13;shape-rendering:geometricPrecision;--ait:transparent;--apk:#F6F1E8;--apkw:1.6px;--apm:#F6F1E8;--aps:#C8AE86;--apd:#E8673E;pointer-events:none}
+.demo .eyebrow{color:var(--wheat)}
+.demo .eyebrow::before{background:var(--overcast)}
+.demo h1{color:var(--fleece);font-size:clamp(44px,5.4vw,84px)}
+.demo h1 span{color:var(--wheat)}
+.demo .lede{color:rgba(246,241,232,.82);max-width:30em}
+/* the three steps become a glowing journey line */
+.demo ol{position:relative;border-top:0;margin-top:clamp(36px,4vw,56px);max-width:560px}
+.demo ol::before{content:"";position:absolute;left:19px;top:24px;bottom:24px;width:2px;background:linear-gradient(var(--brass),var(--maple) 50%,var(--brick))}
+.demo ol li{position:relative;grid-template-columns:40px minmax(0,1fr);gap:22px;padding:0 0 clamp(22px,2.4vw,32px);border-bottom:0;font-size:15.5px;color:rgba(246,241,232,.75)}
+.demo ol li::before{position:relative;z-index:1;width:40px;height:40px;font-size:14px;background:var(--bluestone);color:var(--fleece);border:2px solid var(--wheat);box-shadow:0 0 0 6px rgba(27,42,56,1)}
+.demo ol li:first-child::before{background:linear-gradient(135deg,var(--brass),var(--maple));border-color:transparent;color:var(--bluestone);box-shadow:0 0 0 6px var(--bluestone),0 0 0 9px rgba(232,103,62,.25)}
+.demo ol li>div{padding:clamp(16px,1.6vw,22px) clamp(18px,2vw,26px);background:rgba(246,241,232,.04);border:1px solid rgba(168,192,210,.28);border-radius:0 var(--card-arch) 0 0;transition:background .4s var(--ease),border-color .4s var(--ease),transform .4s var(--ease)}
+.demo ol li:hover>div{background:rgba(246,241,232,.07);border-color:var(--frame-blue);transform:translateX(4px)}
+.demo ol b{color:var(--fleece);font-size:17px;margin-bottom:4px}
+.demo .alt{display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-top:clamp(8px,1vw,14px);margin-left:62px;padding:12px 12px 12px 20px;color:rgba(246,241,232,.8);font-size:15px;background:rgba(246,241,232,.04);border:1px solid rgba(168,192,210,.28);border-radius:0 var(--card-arch) 0 0}
+.demo .alt a{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border-radius:999px;background:var(--fleece);color:var(--bluestone);font-weight:600;text-decoration:none;letter-spacing:.01em;transition:background .3s var(--ease),transform .3s var(--ease)}
+.demo .alt a::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--maple);box-shadow:0 0 0 4px rgba(232,103,62,.18)}
+.demo .alt a:hover{background:var(--wheat);transform:translateY(-1px)}
+@media (max-width:520px){.demo .alt{margin-left:0}}
+/* the photo in its frame, with a floating "your demo" invitation */
+.demo .demo-ph{position:relative;aspect-ratio:1/1;margin-top:clamp(40px,5vw,64px);border-top-right-radius:clamp(120px,16vw,240px);outline:1px solid var(--frame-line-dark);outline-offset:var(--frame-gap);background:var(--deep)}
+.demo .demo-ph img{object-position:50% 58%}
+.dm-invite{position:relative;z-index:3;width:min(86%,380px);margin:clamp(-120px,-8vw,-80px) 0 0 auto;margin-right:clamp(-24px,-2vw,-12px);background:var(--lace);color:var(--bluestone);border-radius:0 var(--card-arch) 0 0;border-top:3px solid var(--maple);box-shadow:0 44px 80px -30px rgba(0,0,0,.6)}
+.dm-inv-hd{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--rule);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--brick)}
+.dm-inv-hd em{font-style:normal;letter-spacing:.04em;text-transform:none;font-size:13px;color:var(--bluestone);display:inline-flex;align-items:center;gap:8px}
+.dm-inv-hd em::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--maple);box-shadow:0 0 0 4px rgba(232,103,62,.18)}
+.dm-invite b{display:block;padding:16px 20px 6px;font-size:19px;font-weight:600;letter-spacing:-.02em}
+.dm-invite ul{list-style:none;padding:0 20px 14px}
+.dm-invite li{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:13.5px;color:var(--ink)}
+.dm-invite li::before{content:"\2713";flex:0 0 auto;display:grid;place-items:center;width:18px;height:18px;margin-top:1px;border-radius:50%;background:rgba(61,78,66,.12);color:var(--ledger);font-size:10.5px;font-weight:700}
+.dm-inv-ft{padding:12px 20px;background:var(--fleece);font-size:12.5px;font-weight:600;color:var(--ledger)}
+/* the form becomes a premium booking card */
+.demo .form{position:relative;background:var(--lace);color:var(--bluestone);padding:clamp(28px,3.4vw,48px);gap:20px;border-radius:0 var(--stage-arch) 0 0;box-shadow:0 70px 120px -50px rgba(0,0,0,.7);outline:1px solid var(--frame-line-dark);outline-offset:var(--frame-gap)}
+.dm-fhd{grid-column:1/-1;display:flex;flex-direction:column;gap:8px;padding-bottom:20px;margin-bottom:4px;border-bottom:1px solid var(--rule)}
+.dm-fhd span{display:inline-flex;align-items:center;gap:12px;font-size:var(--label);font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--brick)}
+.dm-fhd span::before{content:"";width:26px;height:2px;background:var(--brick)}
+.dm-fhd b{font-size:clamp(22px,2vw,28px);font-weight:600;letter-spacing:-.03em;line-height:1.15;max-width:16em}
+.demo .form label{font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.demo .form label i{text-transform:none;letter-spacing:0}
+.demo .form input,.demo .form select,.demo .form textarea{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:14px 16px;transition:border-color .25s var(--ease),box-shadow .25s var(--ease)}
+.demo .form input:hover,.demo .form select:hover,.demo .form textarea:hover{border-color:var(--tin)}
+.demo .form input:focus,.demo .form select:focus,.demo .form textarea:focus{outline:none;border-color:var(--maple);box-shadow:0 0 0 4px rgba(232,103,62,.16)}
+.demo .form select{appearance:none;-webkit-appearance:none;padding-right:44px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23A9533A' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 16px center}
+.demo .form textarea{min-height:clamp(170px,14vw,220px)}
+.demo .form .act{flex-direction:column;align-items:stretch;gap:12px;margin-top:10px}
+.demo .form .act .btn{justify-content:center;padding:18px 26px;font-size:16px}
+.demo .form .act small{min-width:0;text-align:center;color:var(--workshirt)}
+@media (min-width:901px){.demo .form{position:sticky;top:110px}}
+@media (max-width:900px){.demo .wrap{grid-template-columns:minmax(0,1fr)}.dm-arc{width:46vw;opacity:.7}.dm-invite{margin-right:0}.demo .form{border-radius:0 72px 0 0;outline-offset:10px}}
+@media (max-width:520px){.demo ol li{gap:16px}.dm-invite{width:92%}}
+/* the moving band under the booking section */
+.demo+.pp-band .t2{border-top:0}
+
 /* ---------- Footer ---------- */
 .ft-top{padding:clamp(44px,5vw,64px) 0 clamp(32px,4vw,44px)}
 footer .ft-top .lk{--fs:22px}
