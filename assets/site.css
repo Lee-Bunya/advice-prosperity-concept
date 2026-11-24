@@ -898,6 +898,20 @@ p,li,dd,figcaption,blockquote,.lede{text-wrap:pretty}
 .bn-pipe .bn-lk{font-size:var(--fs)}
 .bn-pipe .bn-lk .ic{width:1.9em;height:1.9em}
 
+/* day 1 to 21: slender day markers on a fine baseline. Advice days fill Wheat to Brass, waiting days stay as fine Maple outlines, and today glows */
+.bn .bn-grid{position:relative;padding-bottom:0;background:linear-gradient(rgba(246,241,232,.16),rgba(246,241,232,.16)) 0 100%/100% 1px no-repeat}
+.bn .bn-grid i,.bn .bn-grid i.on,.bn[data-phase] .bn-grid i.on.wait{background:transparent;box-shadow:none}
+.bn .bn-grid i.on:not(:has(+ i.on)){box-shadow:none}
+.bn-grid i::before{content:"";position:absolute;left:50%;top:0;bottom:10px;width:clamp(4px,.42vw,7px);transform:translateX(-50%);border-radius:99px;background:rgba(246,241,232,.1);transition:background .45s var(--ease),box-shadow .45s var(--ease)}
+.bn-grid i.on::before{background:linear-gradient(var(--wheat),var(--brass))}
+.bn[data-phase="2"] .bn-grid i.on.wait::before,.bn[data-phase="3"] .bn-grid i.on.wait::before{background:transparent;box-shadow:inset 0 0 0 1.5px var(--maple)}
+.bn[data-phase="1"] .bn-grid i.now::before{background:var(--maple);box-shadow:0 0 0 4px rgba(232,103,62,.2),0 0 22px rgba(232,103,62,.5)}
+.bn-grid i::after{top:calc(100% + 12px)}
+.bn-key b,.bn-key span:last-child b{width:6px;height:18px;border-radius:99px}
+.bn-key b{background:linear-gradient(var(--wheat),var(--brass))}
+.bn-key span:last-child b{background:transparent;box-shadow:inset 0 0 0 1.5px var(--maple)}
+@media (max-width:899px){.bn-grid i::before{bottom:6px}}
+
 /* ---------- Product walk (See it work) ---------- */
 @media (min-width:1000px){
   .walk-head{max-width:none;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);column-gap:clamp(40px,5vw,96px);align-items:end}
@@ -1157,7 +1171,9 @@ body:has(.phero):has(.walk.inner) .pbreak{padding-top:var(--frame-top);backgroun
 body:has(.phero):has(.walk.inner) .sec.dark{background:radial-gradient(60% 70% at 0% 100%,#24394D 0%,rgba(36,57,77,0) 70%),var(--bluestone)}
 body:has(.phero):has(.walk.inner) .pts{counter-reset:pt;gap:14px;border-top:0}
 body:has(.phero):has(.walk.inner) .pts>div{counter-increment:pt;padding:clamp(22px,2.2vw,32px)!important;border:1px solid var(--frame-blue);border-radius:0 var(--card-arch) 0 0;background:rgba(246,241,232,.04);min-height:clamp(190px,16vw,240px)}
-body:has(.phero):has(.walk.inner) .pts>div::before{content:counter(pt,decimal-leading-zero);display:block;font-size:var(--label-lg);font-weight:600;letter-spacing:.16em;color:var(--wheat);margin-bottom:clamp(22px,3vw,40px)}
+body:has(.phero):has(.walk.inner) .pts>div::before{content:counter(pt);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--wheat);font-size:15px;font-weight:600;letter-spacing:0;color:var(--wheat);font-variant-numeric:lining-nums;margin-bottom:clamp(22px,3vw,36px);background:radial-gradient(circle,rgba(200,174,134,.16),rgba(200,174,134,0) 70%)}
+body:has(.phero):has(.walk.inner) .pts>div{position:relative}
+body:has(.phero):has(.walk.inner) .pts>div::after{content:"";position:absolute;left:calc(clamp(22px,2.2vw,32px) + 50px);right:calc(var(--card-arch) * .6);top:calc(clamp(22px,2.2vw,32px) + 19px);height:1px;background:linear-gradient(90deg,rgba(200,174,134,.55),rgba(200,174,134,0))}
 body:has(.phero):has(.walk.inner) .pts b{font-size:clamp(19px,1.6vw,22px)}
 @media (max-width:760px){body:has(.phero):has(.walk.inner) .pts>div{min-height:0;border-bottom:1px solid var(--frame-blue)}}
 /* cross-link: a framed white card in the AP shape */
@@ -1174,12 +1190,12 @@ body:has(.pp-bento) .phero{background:radial-gradient(60% 80% at 100% 0%,var(--l
 body:has(.pp-bento) .phero h1{font-size:clamp(40px,4.4vw,70px)}
 body:has(.pp-bento) .phero .eyebrow::before{display:inline-block}
 .pp-tile{position:relative;overflow:hidden;border-radius:0 var(--card-arch) 0 0}
-.pp-stats{display:flex;flex-direction:column;justify-content:space-between;gap:18px;padding:clamp(20px,2vw,30px);background:radial-gradient(rgba(246,241,232,.07) 1px,transparent 1.5px) 0 0/20px 20px,radial-gradient(90% 70% at 100% 0%,#24394D 0%,rgba(36,57,77,0) 70%),var(--bluestone);color:var(--fleece);box-shadow:0 40px 70px -40px rgba(17,28,38,.6)}
-.pp-stats small{display:flex;align-items:center;gap:10px;white-space:nowrap;font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--overcast)}
-.pp-stats small::before{content:"";width:18px;height:1.5px;background:var(--overcast)}
-.pp-stats div{padding-top:14px;border-top:1px solid rgba(246,241,232,.14)}
-.pp-stats b{display:block;font-size:clamp(28px,2.6vw,42px);font-weight:600;letter-spacing:-.035em;line-height:1;color:var(--wheat);font-variant-numeric:tabular-nums lining-nums}
-.pp-stats span{display:block;margin-top:8px;font-size:14px;color:rgba(246,241,232,.72)}
+.pp-stats{display:flex;flex-direction:column;gap:0;padding:clamp(36px,3.2vw,50px) clamp(24px,2.2vw,32px) clamp(28px,2.6vw,38px);background:radial-gradient(110% 80% at 100% 0%,#2A4157 0%,rgba(42,65,87,0) 65%),linear-gradient(170deg,var(--bluestone) 40%,#142130 100%);color:var(--fleece);box-shadow:0 40px 70px -40px rgba(17,28,38,.6);outline:1px solid var(--frame-blue-soft);outline-offset:-10px}
+.pp-stats small{display:block;white-space:nowrap;padding-bottom:clamp(18px,1.8vw,26px);font-size:12.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--overcast)}
+.pp-stats div{flex:1;display:flex;flex-direction:column-reverse;justify-content:space-between;gap:14px;padding:clamp(16px,1.6vw,22px) 0 clamp(4px,.6vw,8px);border-top:1px solid rgba(168,192,210,.28)}
+.pp-stats div:first-of-type{border-top-color:var(--wheat)}
+.pp-stats b{display:block;font-size:clamp(52px,4.8vw,80px);font-weight:500;letter-spacing:-.05em;line-height:.85;background:linear-gradient(180deg,#E3CFA8,var(--wheat) 60%,#B39466);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums lining-nums}
+.pp-stats span{display:block;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(246,241,232,.72)}
 .pp-appr{background:#fff;color:var(--bluestone);box-shadow:0 40px 70px -40px rgba(17,28,38,.45),0 0 0 1px rgba(27,42,56,.08)}
 .pp-appr-hd{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 16px;background:var(--ledger);color:var(--fleece);font-size:13px;font-weight:600}
 .pp-appr-hd em{font-style:normal;font-weight:500;color:rgba(246,241,232,.72);white-space:nowrap}
@@ -1210,7 +1226,7 @@ body:has(.pp-bento) .phero .eyebrow::before{display:inline-block}
 }
 @media (max-width:520px){.pp-bento{grid-template-columns:1fr}}
 /* chapters: a fine dot grid on each stage, and an Arc tucked under each screen */
-body:has(.phero):has(.walk.inner) .chap-ui{background:radial-gradient(rgba(246,241,232,.07) 1px,transparent 1.5px) 0 0/22px 22px,radial-gradient(80% 70% at 100% 0%,#24394D 0%,rgba(36,57,77,0) 70%),var(--bluestone)}
+body:has(.phero):has(.walk.inner) .chap-ui{background:radial-gradient(80% 70% at 100% 0%,#24394D 0%,rgba(36,57,77,0) 70%),var(--bluestone)}
 body:has(.phero):has(.walk.inner) .chap-ui .win{position:relative;z-index:1}
 .pp-arc{width:clamp(96px,9vw,150px);z-index:0}
 /* photo break: the Regional Prosperity award as a card on the photo */
@@ -1263,7 +1279,7 @@ body:has(.pp-prep) .prep{display:grid;grid-template-columns:repeat(3,minmax(0,1f
 body:has(.pp-prep) .prep .pr{--c:var(--bluestone);--c2:#24394D;counter-increment:job;position:relative;display:flex;flex-direction:column;gap:0;padding:0;background:#fff;border:0;border-radius:0 var(--card-arch) 0 0;overflow:hidden;align-items:stretch;box-shadow:0 0 0 1px rgba(27,42,56,.08),0 34px 60px -46px rgba(17,28,38,.55);transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
 body:has(.pp-prep) .prep .pr:hover{transform:translateY(-6px);box-shadow:0 0 0 1px rgba(27,42,56,.08),0 50px 80px -44px rgba(17,28,38,.6)}
 /* header: the job title on its colour, with a prepared document peeking out */
-body:has(.pp-prep) .prep .pr b{position:relative;display:block;min-height:clamp(132px,11vw,156px);margin:0;padding:clamp(22px,2.2vw,30px) clamp(22px,2.2vw,30px) 0;background:radial-gradient(rgba(27,42,56,.06) 1px,transparent 1.5px) 0 0/18px 18px,var(--fleece);color:var(--bluestone);border-top:3px solid var(--brick);font-size:clamp(20px,1.7vw,24px);letter-spacing:-.025em;line-height:1.15;overflow:hidden}
+body:has(.pp-prep) .prep .pr b{position:relative;display:block;min-height:clamp(132px,11vw,156px);margin:0;padding:clamp(22px,2.2vw,30px) clamp(22px,2.2vw,30px) 0;background:var(--fleece);color:var(--bluestone);border-top:3px solid var(--brick);font-size:clamp(20px,1.7vw,24px);letter-spacing:-.025em;line-height:1.15;overflow:hidden}
 body:has(.pp-prep) .prep .pr b::before{content:"Prepared for you";display:block;margin-bottom:10px;font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--brick)}
 body:has(.pp-prep) .prep .pr b{min-height:0;padding-bottom:clamp(58px,5vw,70px)}
 body:has(.pp-prep) .prep .pr:nth-child(1){--n:1}body:has(.pp-prep) .prep .pr:nth-child(2){--n:2}body:has(.pp-prep) .prep .pr:nth-child(3){--n:3}
@@ -1296,7 +1312,7 @@ body:has(.pp-prep) .next-note::before{content:"";flex:0 0 auto;width:10px;height
 .pp-band .t2 .ag .arc:nth-child(3){--a:var(--maple);--b:var(--brick)}
 /* product stages on Ledger green for this page */
 body:has(.pp-prep) .walk.inner{background:var(--lace)!important}
-body:has(.pp-prep):has(.walk.inner):has(.phero) .chap-ui{background:radial-gradient(rgba(246,241,232,.07) 1px,transparent 1.5px) 0 0/22px 22px,radial-gradient(80% 70% at 100% 0%,#526656 0%,rgba(82,102,86,0) 70%),var(--ledger)}
+body:has(.pp-prep):has(.walk.inner):has(.phero) .chap-ui{background:radial-gradient(80% 70% at 100% 0%,#526656 0%,rgba(82,102,86,0) 70%),var(--ledger)}
 /* fact find screen: a check column fills the middle, with a quiet header row */
 .ff-x .r,.ff-x .ff-hd{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) auto minmax(86px,auto)}
 .ff-x .ff-hd{display:grid;gap:12px;padding:12px 0 8px;border-bottom:1px solid var(--rule);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--workshirt)}
