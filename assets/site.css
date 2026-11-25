@@ -752,14 +752,13 @@ p,li,dd,figcaption,blockquote,.lede{text-wrap:pretty}
 .hero .tagline{color:var(--fleece);margin-top:clamp(36px,4vw,56px);padding-top:24px;border-top:1px solid rgba(246,241,232,.16);width:fit-content;padding-right:40px}
 .hero{background:radial-gradient(110% 85% at 12% 0%,#23384C 0%,rgba(35,56,76,0) 62%),var(--bluestone);color:var(--fleece);min-height:clamp(640px,calc(100svh - 77px),980px);--ph-top:clamp(44px,5.5vw,84px);--ph-r:min(36vw,560px)}
 .hero-photo{top:var(--ph-top);z-index:1;background:var(--deep)}
-.hero::before,.hero::after{content:"";position:absolute;right:0;bottom:0;border:1px solid rgba(200,174,134,.38);border-right:0;border-bottom:0;pointer-events:none;z-index:0}
-.hero::before{top:calc(var(--ph-top) - 22px);width:calc(50% + 22px);border-top-left-radius:calc(var(--ph-r) + 22px)}
-.hero::after{top:calc(var(--ph-top) - 46px);width:calc(50% + 46px);border-top-left-radius:calc(var(--ph-r) + 46px);border-color:rgba(200,174,134,.18)}
+/* One thin frame around the cover photo, the same line and gap as the photo frames on the other pages */
+.hero::before{content:"";position:absolute;right:0;bottom:0;border:1px solid var(--frame-line-dark);border-right:0;border-bottom:0;pointer-events:none;z-index:0;top:calc(var(--ph-top) - var(--frame-gap));width:calc(50% + var(--frame-gap));border-top-left-radius:calc(var(--ph-r) + var(--frame-gap))}
 .approve{box-shadow:0 50px 90px -30px rgba(0,0,0,.7),0 0 0 1px rgba(246,241,232,.06)}
 .hero-hint{color:var(--bluestone)}
 @media (max-width:900px){
   .hero{min-height:0;background:var(--bluestone)}
-  .hero::before,.hero::after{display:none}
+  .hero::before{display:none}
   .hero-photo{top:auto}
   .hero .tagline{padding-right:0}
 }
@@ -1100,7 +1099,7 @@ body:has(.hero) .walk .win{border-color:transparent;box-shadow:0 70px 120px -50p
 @media (min-width:901px){
   .close-ph .ph{top:var(--frame-top);bottom:0;left:0;right:0;aspect-ratio:auto}
   .close-ph .ph img{width:auto;max-width:none}
-  .close-ph .ph img{position:absolute;top:0;right:0;height:100%;object-fit:cover;translate:18% 0}
+  .close-ph .ph img{position:absolute;top:0;right:0;height:100%;min-width:137%;object-fit:cover;translate:26% 0}
   .close-ph .arcset{--aw:clamp(170px,32%,280px);width:var(--aw);left:calc(var(--aw)*-.32);clip-path:inset(0 0 0 calc(var(--aw)*.32))}
   .close-ph .arcset::before{position:absolute;left:0;bottom:0;width:calc(var(--frame-gap) + 1px);height:100%;background:var(--bluestone);content:none}
 }
