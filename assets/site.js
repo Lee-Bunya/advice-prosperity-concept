@@ -113,8 +113,9 @@
   function bnState(){
     var r=bn.getBoundingClientRect(),p=Math.min(1,Math.max(0,-r.top/(r.height-innerHeight)));
     var phase=p<.38?'1':p<.56?'2':p<.74?'3':'4';
+    if(lastPhase&&Math.abs(phase-lastPhase)===1&&[.38,.56,.74].some(function(e){return Math.abs(p-e)<.012}))phase=lastPhase;
     var day=phase==='1'?Math.max(1,Math.min(21,Math.ceil(p/.36*21))):21;
-    if(day!==lastDay&&phase!=='4'){lastDay=day;nEl.textContent=day;wEl.textContent=days[day-1][0];cells.forEach(function(c,i){c.classList.toggle('on',i<day)})}
+    if(day!==lastDay&&phase!=='4'){lastDay=day;nEl.textContent=day;wEl.textContent=days[day-1][0];cells.forEach(function(c,i){c.classList.toggle('on',i<day);c.classList.toggle('now',i===day-1)})}
     if(phase!==lastPhase){var was=lastPhase;lastPhase=phase;bn.dataset.phase=phase;
       if(phase==='4'){nSmall.textContent='Minutes';nEl.textContent='30';wEl.textContent='From first meeting to advice,\nprepared for your approval.'}
       else if(was==='4'){nSmall.textContent='Day';nEl.textContent=day;lastDay=day}

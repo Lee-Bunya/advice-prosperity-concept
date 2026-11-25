@@ -752,14 +752,13 @@ p,li,dd,figcaption,blockquote,.lede{text-wrap:pretty}
 .hero .tagline{color:var(--fleece);margin-top:clamp(36px,4vw,56px);padding-top:24px;border-top:1px solid rgba(246,241,232,.16);width:fit-content;padding-right:40px}
 .hero{background:radial-gradient(110% 85% at 12% 0%,#23384C 0%,rgba(35,56,76,0) 62%),var(--bluestone);color:var(--fleece);min-height:clamp(640px,calc(100svh - 77px),980px);--ph-top:clamp(44px,5.5vw,84px);--ph-r:min(36vw,560px)}
 .hero-photo{top:var(--ph-top);z-index:1;background:var(--deep)}
-.hero::before,.hero::after{content:"";position:absolute;right:0;bottom:0;border:1px solid rgba(200,174,134,.38);border-right:0;border-bottom:0;pointer-events:none;z-index:0}
-.hero::before{top:calc(var(--ph-top) - 22px);width:calc(50% + 22px);border-top-left-radius:calc(var(--ph-r) + 22px)}
-.hero::after{top:calc(var(--ph-top) - 46px);width:calc(50% + 46px);border-top-left-radius:calc(var(--ph-r) + 46px);border-color:rgba(200,174,134,.18)}
+/* One thin frame around the cover photo, the same line and gap as the photo frames on the other pages */
+.hero::before{content:"";position:absolute;right:0;bottom:0;border:1px solid var(--frame-line-dark);border-right:0;border-bottom:0;pointer-events:none;z-index:0;top:calc(var(--ph-top) - var(--frame-gap));width:calc(50% + var(--frame-gap));border-top-left-radius:calc(var(--ph-r) + var(--frame-gap))}
 .approve{box-shadow:0 50px 90px -30px rgba(0,0,0,.7),0 0 0 1px rgba(246,241,232,.06)}
 .hero-hint{color:var(--bluestone)}
 @media (max-width:900px){
   .hero{min-height:0;background:var(--bluestone)}
-  .hero::before,.hero::after{display:none}
+  .hero::before{display:none}
   .hero-photo{top:auto}
   .hero .tagline{padding-right:0}
 }
@@ -899,6 +898,20 @@ p,li,dd,figcaption,blockquote,.lede{text-wrap:pretty}
 .bn-lk{position:absolute;right:0;bottom:0;--fs:clamp(18px,1.6vw,24px)}
 .bn-pipe .bn-lk{font-size:var(--fs)}
 .bn-pipe .bn-lk .ic{width:1.9em;height:1.9em}
+
+/* day 1 to 21: slender day markers on a fine baseline. Advice days fill Wheat to Brass, waiting days stay as fine Maple outlines, and today glows */
+.bn .bn-grid{position:relative;padding-bottom:0;background:linear-gradient(rgba(246,241,232,.16),rgba(246,241,232,.16)) 0 100%/100% 1px no-repeat}
+.bn .bn-grid i,.bn .bn-grid i.on,.bn[data-phase] .bn-grid i.on.wait{background:transparent;box-shadow:none}
+.bn .bn-grid i.on:not(:has(+ i.on)){box-shadow:none}
+.bn-grid i::before{content:"";position:absolute;left:50%;top:0;bottom:10px;width:clamp(4px,.42vw,7px);transform:translateX(-50%);border-radius:99px;background:rgba(246,241,232,.1);transition:background .45s var(--ease),box-shadow .45s var(--ease)}
+.bn-grid i.on::before{background:linear-gradient(var(--wheat),var(--brass))}
+.bn[data-phase="2"] .bn-grid i.on.wait::before,.bn[data-phase="3"] .bn-grid i.on.wait::before{background:transparent;box-shadow:inset 0 0 0 1.5px var(--maple)}
+.bn[data-phase="1"] .bn-grid i.now::before{background:var(--maple);box-shadow:0 0 0 4px rgba(232,103,62,.2),0 0 22px rgba(232,103,62,.5)}
+.bn-grid i::after{top:calc(100% + 12px)}
+.bn-key b,.bn-key span:last-child b{width:6px;height:18px;border-radius:99px}
+.bn-key b{background:linear-gradient(var(--wheat),var(--brass))}
+.bn-key span:last-child b{background:transparent;box-shadow:inset 0 0 0 1.5px var(--maple)}
+@media (max-width:899px){.bn-grid i::before{bottom:6px}}
 
 /* ---------- Product walk (See it work) ---------- */
 @media (min-width:1000px){
@@ -1086,7 +1099,7 @@ body:has(.hero) .walk .win{border-color:transparent;box-shadow:0 70px 120px -50p
 @media (min-width:901px){
   .close-ph .ph{top:var(--frame-top);bottom:0;left:0;right:0;aspect-ratio:auto}
   .close-ph .ph img{width:auto;max-width:none}
-  .close-ph .ph img{position:absolute;top:0;right:0;height:100%;object-fit:cover;translate:18% 0}
+  .close-ph .ph img{position:absolute;top:0;right:0;height:100%;min-width:137%;object-fit:cover;translate:26% 0}
   .close-ph .arcset{--aw:clamp(170px,32%,280px);width:var(--aw);left:calc(var(--aw)*-.32);clip-path:inset(0 0 0 calc(var(--aw)*.32))}
   .close-ph .arcset::before{position:absolute;left:0;bottom:0;width:calc(var(--frame-gap) + 1px);height:100%;background:var(--bluestone);content:none}
 }
@@ -1159,7 +1172,9 @@ body:has(.phero):has(.walk.inner) .pbreak{padding-top:var(--frame-top);backgroun
 body:has(.phero):has(.walk.inner) .sec.dark{background:radial-gradient(60% 70% at 0% 100%,#24394D 0%,rgba(36,57,77,0) 70%),var(--bluestone)}
 body:has(.phero):has(.walk.inner) .pts{counter-reset:pt;gap:14px;border-top:0}
 body:has(.phero):has(.walk.inner) .pts>div{counter-increment:pt;padding:clamp(22px,2.2vw,32px)!important;border:1px solid var(--frame-blue);border-radius:0 var(--card-arch) 0 0;background:rgba(246,241,232,.04);min-height:clamp(190px,16vw,240px)}
-body:has(.phero):has(.walk.inner) .pts>div::before{content:counter(pt,decimal-leading-zero);display:block;font-size:var(--label-lg);font-weight:600;letter-spacing:.16em;color:var(--wheat);margin-bottom:clamp(22px,3vw,40px)}
+body:has(.phero):has(.walk.inner) .pts>div::before{content:counter(pt);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--wheat);font-size:15px;font-weight:600;letter-spacing:0;color:var(--wheat);font-variant-numeric:lining-nums;margin-bottom:clamp(22px,3vw,36px);background:radial-gradient(circle,rgba(200,174,134,.16),rgba(200,174,134,0) 70%)}
+body:has(.phero):has(.walk.inner) .pts>div{position:relative}
+body:has(.phero):has(.walk.inner) .pts>div::after{content:"";position:absolute;left:calc(clamp(22px,2.2vw,32px) + 50px);right:calc(var(--card-arch) * .6);top:calc(clamp(22px,2.2vw,32px) + 19px);height:1px;background:linear-gradient(90deg,rgba(200,174,134,.55),rgba(200,174,134,0))}
 body:has(.phero):has(.walk.inner) .pts b{font-size:clamp(19px,1.6vw,22px)}
 @media (max-width:760px){body:has(.phero):has(.walk.inner) .pts>div{min-height:0;border-bottom:1px solid var(--frame-blue)}}
 /* cross-link: a framed white card in the AP shape */
@@ -1176,12 +1191,12 @@ body:has(.pp-bento) .phero{background:radial-gradient(60% 80% at 100% 0%,var(--l
 body:has(.pp-bento) .phero h1{font-size:clamp(40px,4.4vw,70px)}
 body:has(.pp-bento) .phero .eyebrow::before{display:inline-block}
 .pp-tile{position:relative;overflow:hidden;border-radius:0 var(--card-arch) 0 0}
-.pp-stats{display:flex;flex-direction:column;justify-content:space-between;gap:18px;padding:clamp(20px,2vw,30px);background:radial-gradient(rgba(246,241,232,.07) 1px,transparent 1.5px) 0 0/20px 20px,radial-gradient(90% 70% at 100% 0%,#24394D 0%,rgba(36,57,77,0) 70%),var(--bluestone);color:var(--fleece);box-shadow:0 40px 70px -40px rgba(17,28,38,.6)}
-.pp-stats small{display:flex;align-items:center;gap:10px;white-space:nowrap;font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--overcast)}
-.pp-stats small::before{content:"";width:18px;height:1.5px;background:var(--overcast)}
-.pp-stats div{padding-top:14px;border-top:1px solid rgba(246,241,232,.14)}
-.pp-stats b{display:block;font-size:clamp(28px,2.6vw,42px);font-weight:600;letter-spacing:-.035em;line-height:1;color:var(--wheat);font-variant-numeric:tabular-nums lining-nums}
-.pp-stats span{display:block;margin-top:8px;font-size:14px;color:rgba(246,241,232,.72)}
+.pp-stats{display:flex;flex-direction:column;gap:0;padding:clamp(36px,3.2vw,50px) clamp(24px,2.2vw,32px) clamp(28px,2.6vw,38px);background:radial-gradient(110% 80% at 100% 0%,#2A4157 0%,rgba(42,65,87,0) 65%),linear-gradient(170deg,var(--bluestone) 40%,#142130 100%);color:var(--fleece);box-shadow:0 40px 70px -40px rgba(17,28,38,.6);outline:1px solid var(--frame-blue-soft);outline-offset:-10px}
+.pp-stats small{display:block;white-space:nowrap;padding-bottom:clamp(18px,1.8vw,26px);font-size:12.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--overcast)}
+.pp-stats div{flex:1;display:flex;flex-direction:column-reverse;justify-content:space-between;gap:14px;padding:clamp(16px,1.6vw,22px) 0 clamp(4px,.6vw,8px);border-top:1px solid rgba(168,192,210,.28)}
+.pp-stats div:first-of-type{border-top-color:var(--wheat)}
+.pp-stats b{display:block;font-size:clamp(52px,4.8vw,80px);font-weight:500;letter-spacing:-.05em;line-height:.85;background:linear-gradient(180deg,#E3CFA8,var(--wheat) 60%,#B39466);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums lining-nums}
+.pp-stats span{display:block;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(246,241,232,.72)}
 .pp-appr{background:#fff;color:var(--bluestone);box-shadow:0 40px 70px -40px rgba(17,28,38,.45),0 0 0 1px rgba(27,42,56,.08)}
 .pp-appr-hd{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 16px;background:var(--ledger);color:var(--fleece);font-size:13px;font-weight:600}
 .pp-appr-hd em{font-style:normal;font-weight:500;color:rgba(246,241,232,.72);white-space:nowrap}
@@ -1212,7 +1227,7 @@ body:has(.pp-bento) .phero .eyebrow::before{display:inline-block}
 }
 @media (max-width:520px){.pp-bento{grid-template-columns:1fr}}
 /* chapters: a fine dot grid on each stage, and an Arc tucked under each screen */
-body:has(.phero):has(.walk.inner) .chap-ui{background:radial-gradient(rgba(246,241,232,.07) 1px,transparent 1.5px) 0 0/22px 22px,radial-gradient(80% 70% at 100% 0%,#24394D 0%,rgba(36,57,77,0) 70%),var(--bluestone)}
+body:has(.phero):has(.walk.inner) .chap-ui{background:radial-gradient(80% 70% at 100% 0%,#24394D 0%,rgba(36,57,77,0) 70%),var(--bluestone)}
 body:has(.phero):has(.walk.inner) .chap-ui .win{position:relative;z-index:1}
 .pp-arc{width:clamp(96px,9vw,150px);z-index:0}
 /* photo break: the Regional Prosperity award as a card on the photo */
@@ -1247,7 +1262,7 @@ body:has(.phero):has(.walk.inner) .xlink>div:first-child{flex:1 1 420px;min-widt
 .pp-chips li::before{content:"";width:10px;height:1.5px;background:var(--brick)}
 
 /* inner pages: the closing photo fills its frame (the shift right is for Kane's photo on the homepage) */
-@media (min-width:901px){body:not(:has(.hero)) .close-ph .ph img{translate:0 0;width:100%;object-position:35% 40%}}
+@media (min-width:901px){body:not(:has(.hero)) .close-ph .ph img{translate:0 0;width:100%;min-width:0;object-position:35% 40%}}
 
 /* ---------- Prepare advice page ---------- */
 /* opening: Bluestone, photo on the left with its arch top right, text on the right, and a stack of prepared documents on the photo's edge */
@@ -1265,7 +1280,7 @@ body:has(.pp-prep) .prep{display:grid;grid-template-columns:repeat(3,minmax(0,1f
 body:has(.pp-prep) .prep .pr{--c:var(--bluestone);--c2:#24394D;counter-increment:job;position:relative;display:flex;flex-direction:column;gap:0;padding:0;background:#fff;border:0;border-radius:0 var(--card-arch) 0 0;overflow:hidden;align-items:stretch;box-shadow:0 0 0 1px rgba(27,42,56,.08),0 34px 60px -46px rgba(17,28,38,.55);transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
 body:has(.pp-prep) .prep .pr:hover{transform:translateY(-6px);box-shadow:0 0 0 1px rgba(27,42,56,.08),0 50px 80px -44px rgba(17,28,38,.6)}
 /* header: the job title on its colour, with a prepared document peeking out */
-body:has(.pp-prep) .prep .pr b{position:relative;display:block;min-height:clamp(132px,11vw,156px);margin:0;padding:clamp(22px,2.2vw,30px) clamp(22px,2.2vw,30px) 0;background:radial-gradient(rgba(27,42,56,.06) 1px,transparent 1.5px) 0 0/18px 18px,var(--fleece);color:var(--bluestone);border-top:3px solid var(--brick);font-size:clamp(20px,1.7vw,24px);letter-spacing:-.025em;line-height:1.15;overflow:hidden}
+body:has(.pp-prep) .prep .pr b{position:relative;display:block;min-height:clamp(132px,11vw,156px);margin:0;padding:clamp(22px,2.2vw,30px) clamp(22px,2.2vw,30px) 0;background:var(--fleece);color:var(--bluestone);border-top:3px solid var(--brick);font-size:clamp(20px,1.7vw,24px);letter-spacing:-.025em;line-height:1.15;overflow:hidden}
 body:has(.pp-prep) .prep .pr b::before{content:"Prepared for you";display:block;margin-bottom:10px;font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--brick)}
 body:has(.pp-prep) .prep .pr b{min-height:0;padding-bottom:clamp(58px,5vw,70px)}
 body:has(.pp-prep) .prep .pr:nth-child(1){--n:1}body:has(.pp-prep) .prep .pr:nth-child(2){--n:2}body:has(.pp-prep) .prep .pr:nth-child(3){--n:3}
@@ -1298,7 +1313,7 @@ body:has(.pp-prep) .next-note::before{content:"";flex:0 0 auto;width:10px;height
 .pp-band .t2 .ag .arc:nth-child(3){--a:var(--maple);--b:var(--brick)}
 /* product stages on Ledger green for this page */
 body:has(.pp-prep) .walk.inner{background:var(--lace)!important}
-body:has(.pp-prep):has(.walk.inner):has(.phero) .chap-ui{background:radial-gradient(rgba(246,241,232,.07) 1px,transparent 1.5px) 0 0/22px 22px,radial-gradient(80% 70% at 100% 0%,#526656 0%,rgba(82,102,86,0) 70%),var(--ledger)}
+body:has(.pp-prep):has(.walk.inner):has(.phero) .chap-ui{background:radial-gradient(80% 70% at 100% 0%,#526656 0%,rgba(82,102,86,0) 70%),var(--ledger)}
 /* fact find screen: a check column fills the middle, with a quiet header row */
 .ff-x .r,.ff-x .ff-hd{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) auto minmax(86px,auto)}
 .ff-x .ff-hd{display:grid;gap:12px;padding:12px 0 8px;border-bottom:1px solid var(--rule);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--workshirt)}
@@ -1342,8 +1357,7 @@ body:has(.pp-prep):has(.walk.inner):has(.phero) .chap-ui{background:radial-gradi
 /* the whole page becomes a Bluestone stage: glows, a fine dot grid, a large Arc and the AP monogram as backdrop */
 .demo{position:relative;overflow:hidden;overflow:clip;color:rgba(246,241,232,.82);padding:clamp(64px,8vw,120px) 0 clamp(80px,9vw,140px);background:radial-gradient(55% 60% at 100% 0%,#2C4258 0%,rgba(44,66,88,0) 70%),radial-gradient(45% 55% at 0% 100%,#24394D 0%,rgba(36,57,77,0) 70%),var(--bluestone)}
 .demo .wrap{position:relative;z-index:2;max-width:none;padding-inline:var(--wide-edge);grid-template-columns:minmax(0,1fr) minmax(0,.92fr);gap:clamp(40px,7vw,120px)}
-.dm-arc{z-index:1;width:clamp(180px,22vw,340px);opacity:.95}
-.dm-mark{position:absolute;z-index:1;left:calc(var(--wide-edge) - 4vw);bottom:-6vw;width:clamp(240px,30vw,460px);height:auto;opacity:.13;shape-rendering:geometricPrecision;--ait:transparent;--apk:#F6F1E8;--apkw:1.6px;--apm:#F6F1E8;--aps:#C8AE86;--apd:#E8673E;pointer-events:none}
+.dm-arc{z-index:1;width:clamp(120px,13vw,210px);opacity:.95}
 .demo .eyebrow{color:var(--wheat)}
 .demo .eyebrow::before{background:var(--overcast)}
 .demo h1{color:var(--fleece);font-size:clamp(44px,5.4vw,84px)}
@@ -1358,11 +1372,21 @@ body:has(.pp-prep):has(.walk.inner):has(.phero) .chap-ui{background:radial-gradi
 .demo ol li>div{padding:clamp(16px,1.6vw,22px) clamp(18px,2vw,26px);background:rgba(246,241,232,.04);border:1px solid rgba(168,192,210,.28);border-radius:0 var(--card-arch) 0 0;transition:background .4s var(--ease),border-color .4s var(--ease),transform .4s var(--ease)}
 .demo ol li:hover>div{background:rgba(246,241,232,.07);border-color:var(--frame-blue);transform:translateX(4px)}
 .demo ol b{color:var(--fleece);font-size:17px;margin-bottom:4px}
-.demo .alt{display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-top:clamp(8px,1vw,14px);margin-left:62px;padding:12px 12px 12px 20px;color:rgba(246,241,232,.8);font-size:15px;background:rgba(246,241,232,.04);border:1px solid rgba(168,192,210,.28);border-radius:0 var(--card-arch) 0 0}
-.demo .alt a{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border-radius:999px;background:var(--fleece);color:var(--bluestone);font-weight:600;text-decoration:none;letter-spacing:.01em;transition:background .3s var(--ease),transform .3s var(--ease)}
-.demo .alt a::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--maple);box-shadow:0 0 0 4px rgba(232,103,62,.18)}
-.demo .alt a:hover{background:var(--wheat);transform:translateY(-1px)}
-@media (max-width:520px){.demo .alt{margin-left:0}}
+@media (max-width:400px){.close .cta a.mail,.cta-row a[href^="mailto"]{font-size:13px;padding-inline:16px;letter-spacing:0}}
+/* Prefer to talk: a small contact card, aligned with the step cards, one ruled row each for phone and email */
+.demo .alt{display:grid;margin:clamp(10px,1.2vw,16px) 0 0 62px;padding:18px clamp(18px,2vw,26px) 6px;font-size:15px;color:rgba(246,241,232,.8);background:rgba(246,241,232,.04);border:1px solid rgba(168,192,210,.28);border-radius:0 var(--card-arch) 0 0}
+.demo .alt-k{margin-bottom:10px;font-size:var(--label);font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--wheat)}
+.demo .alt a.alt-r{display:grid;grid-template-columns:36px 52px minmax(0,1fr) auto;align-items:center;gap:14px;padding:13px 0;border-top:1px solid rgba(168,192,210,.18);color:var(--fleece);text-decoration:none;font-weight:400}
+.demo .alt-r i{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;border:1px solid rgba(200,174,134,.55);color:var(--wheat);transition:background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease)}
+.demo .alt-r svg{width:16px;height:16px}
+.demo .alt-r span{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(246,241,232,.6)}
+.demo .alt-r b{font-weight:600;color:var(--fleece);overflow-wrap:normal;transition:color .3s var(--ease)}
+.demo .alt-r::after{content:"\2192";color:var(--wheat);transition:transform .3s var(--ease)}
+.demo .alt a.alt-r:hover i{background:var(--wheat);border-color:var(--wheat);color:var(--bluestone)}
+.demo .alt a.alt-r:hover b{color:var(--wheat)}
+.demo .alt a.alt-r:hover::after{transform:translateX(4px)}
+.demo .alt a.alt-r:focus-visible{outline:2px solid var(--wheat);outline-offset:4px;border-radius:4px}
+@media (max-width:520px){.demo .alt{margin-left:0}.demo .alt-r span{display:none}.demo .alt a.alt-r{grid-template-columns:36px minmax(0,1fr) auto}}
 /* the photo in its frame, with a floating "your demo" invitation */
 .demo .demo-ph{position:relative;aspect-ratio:1/1;margin-top:clamp(40px,5vw,64px);border-top-right-radius:clamp(120px,16vw,240px);outline:1px solid var(--frame-line-dark);outline-offset:var(--frame-gap);background:var(--deep)}
 .demo .demo-ph img{object-position:50% 58%}
@@ -1392,7 +1416,7 @@ body:has(.pp-prep):has(.walk.inner):has(.phero) .chap-ui{background:radial-gradi
 .demo .form .act .btn{justify-content:center;padding:18px 26px;font-size:16px}
 .demo .form .act small{min-width:0;text-align:center;color:var(--workshirt)}
 @media (min-width:901px){.demo .form{position:sticky;top:110px}}
-@media (max-width:900px){.demo .wrap{grid-template-columns:minmax(0,1fr)}.dm-arc{width:46vw;opacity:.7}.dm-invite{margin-right:0}.demo .form{border-radius:0 72px 0 0;outline-offset:10px}}
+@media (max-width:900px){.demo .wrap{grid-template-columns:minmax(0,1fr)}.dm-arc{width:28vw;opacity:.7}.dm-invite{margin-right:0}.demo .form{border-radius:0 72px 0 0;outline-offset:10px}}
 @media (max-width:520px){.demo ol li{gap:16px}.dm-invite{width:92%}}
 /* the moving band under the booking section */
 .demo+.pp-band .t2{border-top:0}
@@ -1424,6 +1448,39 @@ footer .ft-top .lk{--fs:22px}
 @media (min-width:900px){.bn-hook{grid-column:2;grid-row:2;margin-top:28px;position:relative;z-index:2}.bn-key{grid-column:2;grid-row:2}}
 @media (max-width:899px){.bn-hook{margin-top:40px}.bn[data-phase="4"] .bn-key,.bn[data-phase="4"] .bn-count .what{display:none}.bn-grid::after{bottom:auto;top:calc(100% + 8px);right:auto;left:0}}
 @media (prefers-reduced-motion:reduce){.bn-grid i,.bn-hook,.bn-grid i::after{transition:none!important}}
+/* Step 4 with the thin day bars: the 20 later days fade back (right to left), and day 1 shrinks to one short glowing "30 min" bar */
+.bn[data-phase="4"] .bn-grid i,.bn[data-phase="4"] .bn-grid i:first-child{background:transparent!important;box-shadow:none!important;opacity:1;transform:none}
+.bn-grid i::before{transition:background .45s var(--ease),box-shadow .45s var(--ease),top .8s var(--ease)}
+.bn[data-phase="4"] .bn-grid i:not(:first-child)::before{background:rgba(246,241,232,.07);box-shadow:none;transition-delay:calc(var(--k,0)*35ms)}
+.bn[data-phase="4"] .bn-grid i:first-child::before{top:min(78%,calc(100% - 26px));background:linear-gradient(var(--wheat),var(--brass));box-shadow:0 0 0 4px rgba(217,164,65,.16),0 0 24px rgba(217,164,65,.5);transition-delay:.85s}
+.bn[data-phase="4"] .bn-grid i:first-child::after{transform:none;left:50%;translate:-50% 0}
+@media (min-width:900px){.bn[data-phase="4"] .bn-count .what{font-size:clamp(14px,1.12vw,16.5px)}}
+/* Step changes: the outgoing step fades out in place first, then the next one rises in, so text and panels never overlap mid-change */
+.bn[data-phase] .bn-cap,.bn[data-phase] .bn-days,.bn[data-phase] .bn-pipe{opacity:0;transform:translateY(12px);visibility:hidden;pointer-events:none;transition:opacity .26s ease,transform 0s linear .26s,visibility 0s linear .26s}
+.bn[data-phase="1"] .bn-cap.c1,.bn[data-phase="2"] .bn-cap.c2,.bn[data-phase="3"] .bn-cap.c3,.bn[data-phase="4"] .bn-cap.c4,.bn[data-phase="1"] .bn-days,.bn[data-phase="2"] .bn-days,.bn[data-phase="4"] .bn-days,.bn[data-phase="3"] .bn-pipe{opacity:1;transform:none;visibility:visible;pointer-events:auto;transition:opacity .6s var(--ease) .28s,transform .7s var(--ease) .28s,visibility 0s linear .28s}
+@media (prefers-reduced-motion:reduce){.bn[data-phase] .bn-cap,.bn[data-phase] .bn-days,.bn[data-phase] .bn-pipe,.bn-grid i::before{transition:none!important;transform:none!important}}
+/* Phones: start each step just below the nav so the heading never hides under it, and keep the panel above the footnote */
+@media (max-width:760px){
+  .bn-stick{align-items:flex-start;padding-top:80px}
+  .bn-cap h2{font-size:27px}
+  .bn-cap p{margin-top:10px;font-size:14px;line-height:1.5}
+  .bn-note{bottom:6px}
+  .bn-stage{min-height:430px}
+  .bn-hook{margin-top:30px}
+}
+@media (max-width:760px) and (max-height:760px){
+  .bn-stick{padding-top:70px}
+  .bn .eyebrow{margin-bottom:8px}
+  .bn-cap h2{font-size:23px}
+  .bn-cap p{margin-top:6px;font-size:13px;line-height:1.45}
+  .bn-stage{margin-top:10px;min-height:356px}
+  .bn-days,.bn-pipe{inset:16px}
+  .bn-count .n{font-size:44px}
+  .bn-hook{margin-top:34px}
+  .bn-grid i{aspect-ratio:1/.8}
+  .bn-hook p{font-size:15px}
+  .bn-note{bottom:3px;font-size:10.5px}
+}
 
 /* Prepare advice: the 30-minute line is current, not upcoming */
 body:has(.pp-prep) .next-note.now{border-style:solid;border-color:color-mix(in srgb,var(--brick) 40%,transparent)}
