@@ -11,6 +11,16 @@ Whatever is on `main` is live. Changes reach `main` only through a pull request 
 3. Open a pull request into `main` and say what changed.
 4. Lee reviews and merges. The site updates a minute or two after the merge.
 
+## After changing a stylesheet or script
+
+Browsers keep a saved copy of `assets/*.css` and `assets/*.js`, so visitors can see the old look for a while after a change. Every page links them with a version stamp (`?v=…`). After you change any of those files, run this from the website folder and commit the result with your change:
+
+```
+python3 tools/bump-version.py
+```
+
+It sets a new stamp on every page, so browsers fetch the new files straight away.
+
 ## Don't change
 
 - `CNAME`: it holds the live domain. Editing or deleting it takes the site off adviceprosperity.com.au.

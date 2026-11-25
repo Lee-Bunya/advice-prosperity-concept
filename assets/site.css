@@ -1428,3 +1428,12 @@ footer .ft-top .lk{--fs:22px}
 /* Prepare advice: the 30-minute line is current, not upcoming */
 body:has(.pp-prep) .next-note.now{border-style:solid;border-color:color-mix(in srgb,var(--brick) 40%,transparent)}
 body:has(.pp-prep) .next-note.now::before{background:var(--brick);box-shadow:0 0 0 5px rgba(169,83,58,.14)}
+
+/* Demo form: sends directly (spam check, honeypot, thank-you state) */
+.form .hp{position:absolute!important;left:-10000px;width:1px;height:1px;overflow:hidden}
+.form .ts{min-height:65px}
+.form .act button[disabled]{opacity:.7;cursor:progress}
+.form-done{background:var(--lace);padding:clamp(28px,3.6vw,48px);border-top-right-radius:var(--card-arch,48px);outline:none}
+.form-done h3{font-size:clamp(26px,2.6vw,36px);color:var(--bluestone)}
+.form-done p{margin-top:12px;font-size:16px;color:var(--ink)}
+.form-done a{color:var(--bluestone);font-weight:600}
