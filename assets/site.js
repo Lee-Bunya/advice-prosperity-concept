@@ -8,6 +8,16 @@
 
   var nav=d.getElementById('nav');
 
+  /* homepage header: dark over the cover, light once the next section reaches the top.
+     A class swap rather than a scroll-driven animation, which Chrome didn't always repaint. */
+  var bnTop=d.getElementById('bottleneck');
+  if(nav&&bnTop&&d.querySelector('.hero')){
+    var solid=function(){nav.classList.toggle('solid',bnTop.getBoundingClientRect().top<=nav.offsetHeight)};
+    var navTick=false;
+    addEventListener('scroll',function(){if(navTick)return;navTick=true;requestAnimationFrame(function(){navTick=false;solid()})},{passive:true});
+    addEventListener('resize',solid);solid();
+  }
+
   /* phone menu */
   var tg=d.querySelector('.nav-toggle');
   if(tg){tg.addEventListener('click',function(){var o=nav.classList.toggle('open');tg.setAttribute('aria-expanded',o)});
