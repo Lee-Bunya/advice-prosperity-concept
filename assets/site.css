@@ -1357,8 +1357,7 @@ body:has(.pp-prep):has(.walk.inner):has(.phero) .chap-ui{background:radial-gradi
 /* the whole page becomes a Bluestone stage: glows, a fine dot grid, a large Arc and the AP monogram as backdrop */
 .demo{position:relative;overflow:hidden;overflow:clip;color:rgba(246,241,232,.82);padding:clamp(64px,8vw,120px) 0 clamp(80px,9vw,140px);background:radial-gradient(55% 60% at 100% 0%,#2C4258 0%,rgba(44,66,88,0) 70%),radial-gradient(45% 55% at 0% 100%,#24394D 0%,rgba(36,57,77,0) 70%),var(--bluestone)}
 .demo .wrap{position:relative;z-index:2;max-width:none;padding-inline:var(--wide-edge);grid-template-columns:minmax(0,1fr) minmax(0,.92fr);gap:clamp(40px,7vw,120px)}
-.dm-arc{z-index:1;width:clamp(180px,22vw,340px);opacity:.95}
-.dm-mark{position:absolute;z-index:1;left:calc(var(--wide-edge) - 4vw);bottom:-6vw;width:clamp(240px,30vw,460px);height:auto;opacity:.13;shape-rendering:geometricPrecision;--ait:transparent;--apk:#F6F1E8;--apkw:1.6px;--apm:#F6F1E8;--aps:#C8AE86;--apd:#E8673E;pointer-events:none}
+.dm-arc{z-index:1;width:clamp(120px,13vw,210px);opacity:.95}
 .demo .eyebrow{color:var(--wheat)}
 .demo .eyebrow::before{background:var(--overcast)}
 .demo h1{color:var(--fleece);font-size:clamp(44px,5.4vw,84px)}
@@ -1373,13 +1372,21 @@ body:has(.pp-prep):has(.walk.inner):has(.phero) .chap-ui{background:radial-gradi
 .demo ol li>div{padding:clamp(16px,1.6vw,22px) clamp(18px,2vw,26px);background:rgba(246,241,232,.04);border:1px solid rgba(168,192,210,.28);border-radius:0 var(--card-arch) 0 0;transition:background .4s var(--ease),border-color .4s var(--ease),transform .4s var(--ease)}
 .demo ol li:hover>div{background:rgba(246,241,232,.07);border-color:var(--frame-blue);transform:translateX(4px)}
 .demo ol b{color:var(--fleece);font-size:17px;margin-bottom:4px}
-.demo .alt{display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-top:clamp(8px,1vw,14px);margin-left:62px;padding:12px 12px 12px 20px;color:rgba(246,241,232,.8);font-size:15px;background:rgba(246,241,232,.04);border:1px solid rgba(168,192,210,.28);border-radius:0 var(--card-arch) 0 0}
-.demo .alt a{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border-radius:999px;background:var(--fleece);color:var(--bluestone);font-weight:600;text-decoration:none;letter-spacing:.01em;transition:background .3s var(--ease),transform .3s var(--ease)}
-.demo .alt a::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--maple);box-shadow:0 0 0 4px rgba(232,103,62,.18)}
-.demo .alt a:hover{background:var(--wheat);transform:translateY(-1px)}
-.demo .alt a.em::before{content:none}
-@media (max-width:400px){.close .cta a.mail,.demo .alt a.em,.cta-row a[href^="mailto"]{font-size:13px;padding-inline:16px;letter-spacing:0}}
-@media (max-width:520px){.demo .alt{margin-left:0}}
+@media (max-width:400px){.close .cta a.mail,.cta-row a[href^="mailto"]{font-size:13px;padding-inline:16px;letter-spacing:0}}
+/* Prefer to talk: a small contact card, aligned with the step cards, one ruled row each for phone and email */
+.demo .alt{display:grid;margin:clamp(10px,1.2vw,16px) 0 0 62px;padding:18px clamp(18px,2vw,26px) 6px;font-size:15px;color:rgba(246,241,232,.8);background:rgba(246,241,232,.04);border:1px solid rgba(168,192,210,.28);border-radius:0 var(--card-arch) 0 0}
+.demo .alt-k{margin-bottom:10px;font-size:var(--label);font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--wheat)}
+.demo .alt a.alt-r{display:grid;grid-template-columns:36px 52px minmax(0,1fr) auto;align-items:center;gap:14px;padding:13px 0;border-top:1px solid rgba(168,192,210,.18);color:var(--fleece);text-decoration:none;font-weight:400}
+.demo .alt-r i{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;border:1px solid rgba(200,174,134,.55);color:var(--wheat);transition:background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease)}
+.demo .alt-r svg{width:16px;height:16px}
+.demo .alt-r span{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(246,241,232,.6)}
+.demo .alt-r b{font-weight:600;color:var(--fleece);overflow-wrap:normal;transition:color .3s var(--ease)}
+.demo .alt-r::after{content:"\2192";color:var(--wheat);transition:transform .3s var(--ease)}
+.demo .alt a.alt-r:hover i{background:var(--wheat);border-color:var(--wheat);color:var(--bluestone)}
+.demo .alt a.alt-r:hover b{color:var(--wheat)}
+.demo .alt a.alt-r:hover::after{transform:translateX(4px)}
+.demo .alt a.alt-r:focus-visible{outline:2px solid var(--wheat);outline-offset:4px;border-radius:4px}
+@media (max-width:520px){.demo .alt{margin-left:0}.demo .alt-r span{display:none}.demo .alt a.alt-r{grid-template-columns:36px minmax(0,1fr) auto}}
 /* the photo in its frame, with a floating "your demo" invitation */
 .demo .demo-ph{position:relative;aspect-ratio:1/1;margin-top:clamp(40px,5vw,64px);border-top-right-radius:clamp(120px,16vw,240px);outline:1px solid var(--frame-line-dark);outline-offset:var(--frame-gap);background:var(--deep)}
 .demo .demo-ph img{object-position:50% 58%}
@@ -1409,7 +1416,7 @@ body:has(.pp-prep):has(.walk.inner):has(.phero) .chap-ui{background:radial-gradi
 .demo .form .act .btn{justify-content:center;padding:18px 26px;font-size:16px}
 .demo .form .act small{min-width:0;text-align:center;color:var(--workshirt)}
 @media (min-width:901px){.demo .form{position:sticky;top:110px}}
-@media (max-width:900px){.demo .wrap{grid-template-columns:minmax(0,1fr)}.dm-arc{width:46vw;opacity:.7}.dm-invite{margin-right:0}.demo .form{border-radius:0 72px 0 0;outline-offset:10px}}
+@media (max-width:900px){.demo .wrap{grid-template-columns:minmax(0,1fr)}.dm-arc{width:28vw;opacity:.7}.dm-invite{margin-right:0}.demo .form{border-radius:0 72px 0 0;outline-offset:10px}}
 @media (max-width:520px){.demo ol li{gap:16px}.dm-invite{width:92%}}
 /* the moving band under the booking section */
 .demo+.pp-band .t2{border-top:0}
