@@ -133,14 +133,24 @@
   rng.addEventListener('input',price);price();
   }
 
-  /* demo form: composes an email in the visitor's own mail app */
+  /* demo form: sends the request to the enquiries Worker (forms.adviceprosperity.com.au) */
   var df=d.getElementById('demoForm');
   if(df)df.addEventListener('submit',function(e){
     e.preventDefault();
-    var msg=d.getElementById('demoMsg'),v=function(n){return (df.elements[n].value||'').trim()};
-    if(!v('name')||!v('practice')||!/^\S+@\S+\.\S+$/.test(v('email'))){msg.style.color='var(--brick)';msg.textContent='Add your name, practice and a valid email, then try again.';return}
-    var body=['Name: '+v('name'),'Practice: '+v('practice'),'Email: '+v('email'),'Phone: '+(v('phone')||'not given'),'Advisers: '+v('advisers'),'',v('note')].join('\n');
-    location.href='mailto:enquiries@adviceprosperity.com.au?subject='+encodeURIComponent('Demo request: '+v('practice'))+'&body='+encodeURIComponent(body);
-    msg.style.color='';msg.textContent='Your email is ready to send. If nothing opened, call 1300 286 922.';
+    var msg=d.getElementById('demoMsg'),btn=df.querySelector('button[type=submit]'),v=function(n){var el=df.elements[n];return el?(el.value||'').trim():''};
+    var fail=function(t){msg.style.color='var(--brick)';msg.innerHTML='';msg.textContent=t;btn.disabled=false;btn.textContent='Request a demo'};
+    if(!v('name')||!v('practice')||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('email'))){fail('Add your name, practice and a valid email, then try again.');return}
+    if(!v('cf-turnstile-response')){fail('Please complete the security check above, then try again.');return}
+    var data={};['name','practice','email','phone','advisers','note','website','cf-turnstile-response'].forEach(function(n){data[n]=v(n)});
+    btn.disabled=true;btn.textContent='Sending…';msg.style.color='';msg.textContent='';
+    fetch('https://forms.adviceprosperity.com.au/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+      .then(function(r){return r.json().catch(function(){return {ok:false}})})
+      .then(function(res){
+        if(!res.ok){fail(res.error||'We couldn’t send your request just now. Please call 1300 286 922.');if(window.turnstile)turnstile.reset();return}
+        var done=d.createElement('div');done.className='form-done';done.setAttribute('role','status');done.tabIndex=-1;
+        done.innerHTML='<h3>Thanks, '+v('name').split(' ')[0].replace(/[<>&"]/g,'')+'.</h3><p>Your request is with our team. We’ll be in touch to book a time that suits you.</p><p>Prefer to talk now? Call <a href="tel:1300286922">1300 286 922</a>.</p>';
+        df.replaceWith(done);done.focus();
+      })
+      .catch(function(){fail('We couldn’t reach our server. Please try again, or email enquiries@adviceprosperity.com.au.');if(window.turnstile)turnstile.reset()});
   });
 })();

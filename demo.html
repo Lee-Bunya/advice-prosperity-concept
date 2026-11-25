@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://adviceprosperity.com.au/demo.html">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="assets/site.css?v=202611252202">
+<link rel="stylesheet" href="assets/site.css?v=202611252208">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -70,7 +70,9 @@
       <div class="f w"><label for="fSize">Advisers in your practice</label>
         <select id="fSize" name="advisers"><option>1 to 2</option><option>3 to 5</option><option>6 to 10</option><option>11 to 20</option><option>More than 20</option></select></div>
       <div class="f w"><label for="fNote">Anything we should know? <i>(optional)</i></label><textarea id="fNote" name="note"></textarea></div>
-      <div class="act"><button class="btn" type="submit">Request a demo</button><small>This opens an email in your mail app, ready to send to our team.</small></div>
+      <div class="hp" aria-hidden="true"><label for="fWebsite">Leave this empty</label><input id="fWebsite" name="website" tabindex="-1" autocomplete="off"></div>
+      <div class="f w ts"><div class="cf-turnstile" data-sitekey="TURNSTILE_SITE_KEY" data-theme="light" data-size="flexible"></div></div>
+      <div class="act"><button class="btn" type="submit">Request a demo</button><small>Your request goes straight to our team. We&rsquo;ll be in touch to book a time.</small></div>
       <div class="msg" id="demoMsg" role="status"></div>
     </form>
   </div>
@@ -101,6 +103,7 @@
   </div>
 </footer>
 
-<script src="assets/site.js?v=202611252202"></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script src="assets/site.js?v=202611252208"></script>
 </body>
 </html>
