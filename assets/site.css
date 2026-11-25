@@ -699,7 +699,9 @@ p,li,dd,figcaption,blockquote,.lede{text-wrap:pretty}
 @property --bb{syntax:'<color>';inherits:true;initial-value:#1B2A38}
 @property --bf{syntax:'<color>';inherits:true;initial-value:#F6F1E8}
 @supports (timeline-scope:none) and (animation-timeline:view()){
-  body:has(.hero) .nav{background:var(--nb);border-bottom-color:var(--nl);animation:home-nav linear both;animation-timeline:--walk;animation-range:entry 92% entry 100%}
+  body:has(.hero) .nav{background:var(--nb);border-bottom-color:var(--nl);animation:none;transition:background-color .35s,box-shadow .35s,border-color .35s}
+  body:has(.hero) .nav:not(.solid){--nb:#1B2A38;--nf:#F6F1E8;--nt:rgba(27,42,56,0);--nk:#F6F1E8;--nl:rgba(246,241,232,.1);--bb:#F6F1E8;--bf:#1B2A38;box-shadow:none}
+  body:has(.hero) .nav.solid{--nb:rgba(246,241,232,.96);--nf:#1B2A38;--nt:#1B2A38;--nk:rgba(246,241,232,0);--nl:rgba(27,42,56,.08);--bb:#1B2A38;--bf:#F6F1E8;box-shadow:0 1px 0 rgba(27,42,56,.08),0 14px 34px -26px rgba(17,28,38,.5)}
   @keyframes home-nav{from{--nb:#1B2A38;--nf:#F6F1E8;--nt:rgba(27,42,56,0);--nk:#F6F1E8;--nl:rgba(246,241,232,.1);--bb:#F6F1E8;--bf:#1B2A38;box-shadow:none} to{--nb:rgba(246,241,232,.96);--nf:#1B2A38;--nt:#1B2A38;--nk:rgba(246,241,232,0);--nl:rgba(27,42,56,.08);--bb:#1B2A38;--bf:#F6F1E8;box-shadow:0 1px 0 rgba(27,42,56,.08),0 14px 34px -26px rgba(17,28,38,.5)}}
   body:has(.hero) .nav .lk{--w:var(--nf);--ait:var(--nt);--apk:var(--nk)}
   body:has(.hero) .nav .btn.sm.dark{background:var(--bb);border-color:var(--bb);color:var(--bf)}
@@ -1426,21 +1428,3 @@ footer .ft-top .lk{--fs:22px}
 /* Prepare advice: the 30-minute line is current, not upcoming */
 body:has(.pp-prep) .next-note.now{border-style:solid;border-color:color-mix(in srgb,var(--brick) 40%,transparent)}
 body:has(.pp-prep) .next-note.now::before{background:var(--brick);box-shadow:0 0 0 5px rgba(169,83,58,.14)}
-
-/* ---------- Homepage header colours: animate the elements themselves ----------
-   Chrome animates the --nf / --bb / --bf colour variables on scroll but doesn't always
-   repaint text that reads them, so the logo wordmark, menu links and Book a demo text
-   could stay dark on the dark header (or dark on the dark button). Animating each
-   element's own colour on the same scroll timeline repaints reliably. */
-@supports (timeline-scope:none) and (animation-timeline:view()){
-  body:has(.hero) .nav:not(.open) .lk,
-  body:has(.hero) .nav:not(.open) .nav-toggle{animation:home-nav-ink linear both;animation-timeline:--walk;animation-range:entry 92% entry 100%}
-  body:has(.hero) .nav:not(.open) .btn.sm.dark{animation:home-nav-btn linear both;animation-timeline:--walk;animation-range:entry 92% entry 100%}
-  @keyframes home-nav-ink{from{color:#F6F1E8;border-color:#F6F1E8}to{color:#1B2A38;border-color:#1B2A38}}
-  @keyframes home-nav-btn{from{background-color:#F6F1E8;border-color:#F6F1E8;color:#1B2A38}to{background-color:#1B2A38;border-color:#1B2A38;color:#F6F1E8}}
-  body:has(.hero) .nav .btn.sm.dark:hover{background-color:var(--brick)!important;border-color:var(--brick)!important;color:#fff!important}
-  @media (min-width:901px){
-    body:has(.hero) .nav:not(.open)>.wrap>nav>ul>li>a{animation:home-nav-ink linear both;animation-timeline:--walk;animation-range:entry 92% entry 100%}
-    body:has(.hero) .nav>.wrap>nav>ul>li>a:hover{color:var(--brick)!important}
-  }
-}
