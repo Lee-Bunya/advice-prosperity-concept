@@ -140,7 +140,7 @@
     var msg=d.getElementById('demoMsg'),v=function(n){return (df.elements[n].value||'').trim()};
     if(!v('name')||!v('practice')||!/^\S+@\S+\.\S+$/.test(v('email'))){msg.style.color='var(--brick)';msg.textContent='Add your name, practice and a valid email, then try again.';return}
     var body=['Name: '+v('name'),'Practice: '+v('practice'),'Email: '+v('email'),'Phone: '+(v('phone')||'not given'),'Advisers: '+v('advisers'),'',v('note')].join('\n');
-    location.href='mailto:info@adviceprosperity.com.au?subject='+encodeURIComponent('Demo request: '+v('practice'))+'&body='+encodeURIComponent(body);
+    location.href='mailto:enquiries@adviceprosperity.com.au?subject='+encodeURIComponent('Demo request: '+v('practice'))+'&body='+encodeURIComponent(body);
     msg.style.color='';msg.textContent='Your email is ready to send. If nothing opened, call 1300 286 922.';
   });
 })();
