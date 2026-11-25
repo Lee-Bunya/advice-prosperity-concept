@@ -101,8 +101,9 @@
   var lastDay=-1,lastPhase='';
   function bnState(){
     var r=bn.getBoundingClientRect(),p=Math.min(1,Math.max(0,-r.top/(r.height-innerHeight)));
-    var phase=p<.5?'1':p<.74?'2':'3';
-    var day=phase==='1'?Math.max(1,Math.min(21,Math.ceil(p/.48*21))):21;
+    var phase=p<.42?'1':p<.6?'2':p<.78?'3':'4';
+    if(lastPhase&&Math.abs(phase-lastPhase)===1&&[.42,.6,.78].some(function(e){return Math.abs(p-e)<.012}))phase=lastPhase;
+    var day=phase==='1'?Math.max(1,Math.min(21,Math.ceil(p/.4*21))):21;
     if(day!==lastDay){lastDay=day;nEl.textContent=day;wEl.textContent=days[day-1][0];cells.forEach(function(c,i){c.classList.toggle('on',i<day);c.classList.toggle('now',i===day-1)})}
     if(phase!==lastPhase){lastPhase=phase;bn.dataset.phase=phase;if(phase==='2')wEl.textContent='4 days of advice.\n17 days of everything else.'; else if(phase==='1')wEl.textContent=days[day-1][0]}
   }
