@@ -1262,7 +1262,7 @@ body:has(.phero):has(.walk.inner) .xlink>div:first-child{flex:1 1 420px;min-widt
 .pp-chips li::before{content:"";width:10px;height:1.5px;background:var(--brick)}
 
 /* inner pages: the closing photo fills its frame (the shift right is for Kane's photo on the homepage) */
-@media (min-width:901px){body:not(:has(.hero)) .close-ph .ph img{translate:0 0;width:100%;object-position:35% 40%}}
+@media (min-width:901px){body:not(:has(.hero)) .close-ph .ph img{translate:0 0;width:100%;min-width:0;object-position:35% 40%}}
 
 /* ---------- Prepare advice page ---------- */
 /* opening: Bluestone, photo on the left with its arch top right, text on the right, and a stack of prepared documents on the photo's edge */
@@ -1377,6 +1377,8 @@ body:has(.pp-prep):has(.walk.inner):has(.phero) .chap-ui{background:radial-gradi
 .demo .alt a{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border-radius:999px;background:var(--fleece);color:var(--bluestone);font-weight:600;text-decoration:none;letter-spacing:.01em;transition:background .3s var(--ease),transform .3s var(--ease)}
 .demo .alt a::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--maple);box-shadow:0 0 0 4px rgba(232,103,62,.18)}
 .demo .alt a:hover{background:var(--wheat);transform:translateY(-1px)}
+.demo .alt a.em::before{content:none}
+@media (max-width:400px){.close .cta a.mail,.demo .alt a.em,.cta-row a[href^="mailto"]{font-size:13px;padding-inline:16px;letter-spacing:0}}
 @media (max-width:520px){.demo .alt{margin-left:0}}
 /* the photo in its frame, with a floating "your demo" invitation */
 .demo .demo-ph{position:relative;aspect-ratio:1/1;margin-top:clamp(40px,5vw,64px);border-top-right-radius:clamp(120px,16vw,240px);outline:1px solid var(--frame-line-dark);outline-offset:var(--frame-gap);background:var(--deep)}
