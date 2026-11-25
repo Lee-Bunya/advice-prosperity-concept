@@ -1431,7 +1431,9 @@ body:has(.pp-prep) .next-note.now::before{background:var(--brick);box-shadow:0 0
 
 /* Demo form: sends directly (spam check, honeypot, thank-you state) */
 .form .hp{position:absolute!important;left:-10000px;width:1px;height:1px;overflow:hidden}
-.form .ts{min-height:65px}
+/* spam check: hidden unless Cloudflare needs the visitor to interact */
+.form .act .ts{order:3;flex:0 0 0;width:0;height:0;overflow:hidden}
+.form .act .ts.show{flex:0 0 100%;width:auto;height:auto;overflow:visible}
 .form .act button[disabled]{opacity:.7;cursor:progress}
 .form-done{background:var(--lace);padding:clamp(28px,3.6vw,48px);border-top-right-radius:var(--card-arch,48px);outline:none}
 .form-done h3{font-size:clamp(26px,2.6vw,36px);color:var(--bluestone)}

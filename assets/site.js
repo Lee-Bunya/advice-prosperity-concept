@@ -133,6 +133,10 @@
   rng.addEventListener('input',price);price();
   }
 
+  /* spam check shows itself only if Cloudflare needs the visitor to interact */
+  window.apTsShow=function(){var t=d.querySelector('.form .ts');if(t)t.classList.add('show')};
+  window.apTsHide=function(){var t=d.querySelector('.form .ts');if(t)t.classList.remove('show')};
+
   /* demo form: sends the request to the enquiries Worker (forms.adviceprosperity.com.au) */
   var df=d.getElementById('demoForm');
   if(df)df.addEventListener('submit',function(e){
@@ -140,9 +144,11 @@
     var msg=d.getElementById('demoMsg'),btn=df.querySelector('button[type=submit]'),v=function(n){var el=df.elements[n];return el?(el.value||'').trim():''};
     var fail=function(t){msg.style.color='var(--brick)';msg.innerHTML='';msg.textContent=t;btn.disabled=false;btn.textContent='Request a demo'};
     if(!v('name')||!v('practice')||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('email'))){fail('Add your name, practice and a valid email, then try again.');return}
-    if(!v('cf-turnstile-response')){fail('Please complete the security check above, then try again.');return}
-    var data={};['name','practice','email','phone','advisers','note','website','cf-turnstile-response'].forEach(function(n){data[n]=v(n)});
     btn.disabled=true;btn.textContent='Sending…';msg.style.color='';msg.textContent='';
+    /* the spam check runs quietly; wait briefly for its token if it isn't ready yet */
+    var tries=0;(function ready(){
+      if(!v('cf-turnstile-response')){if(tries++<30){setTimeout(ready,300);return}fail('Please complete the security check above, then try again.');return}
+    var data={};['name','practice','email','phone','advisers','note','website','cf-turnstile-response'].forEach(function(n){data[n]=v(n)});
     fetch('https://forms.adviceprosperity.com.au/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
       .then(function(r){return r.json().catch(function(){return {ok:false}})})
       .then(function(res){
@@ -152,5 +158,6 @@
         df.replaceWith(done);done.focus();
       })
       .catch(function(){fail('We couldn’t reach our server. Please try again, or email enquiries@adviceprosperity.com.au.');if(window.turnstile)turnstile.reset()});
+    })();
   });
 })();
