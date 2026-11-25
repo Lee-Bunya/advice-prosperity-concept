@@ -1426,3 +1426,21 @@ footer .ft-top .lk{--fs:22px}
 /* Prepare advice: the 30-minute line is current, not upcoming */
 body:has(.pp-prep) .next-note.now{border-style:solid;border-color:color-mix(in srgb,var(--brick) 40%,transparent)}
 body:has(.pp-prep) .next-note.now::before{background:var(--brick);box-shadow:0 0 0 5px rgba(169,83,58,.14)}
+
+/* ---------- Homepage header colours: animate the elements themselves ----------
+   Chrome animates the --nf / --bb / --bf colour variables on scroll but doesn't always
+   repaint text that reads them, so the logo wordmark, menu links and Book a demo text
+   could stay dark on the dark header (or dark on the dark button). Animating each
+   element's own colour on the same scroll timeline repaints reliably. */
+@supports (timeline-scope:none) and (animation-timeline:view()){
+  body:has(.hero) .nav:not(.open) .lk,
+  body:has(.hero) .nav:not(.open) .nav-toggle{animation:home-nav-ink linear both;animation-timeline:--walk;animation-range:entry 92% entry 100%}
+  body:has(.hero) .nav:not(.open) .btn.sm.dark{animation:home-nav-btn linear both;animation-timeline:--walk;animation-range:entry 92% entry 100%}
+  @keyframes home-nav-ink{from{color:#F6F1E8;border-color:#F6F1E8}to{color:#1B2A38;border-color:#1B2A38}}
+  @keyframes home-nav-btn{from{background-color:#F6F1E8;border-color:#F6F1E8;color:#1B2A38}to{background-color:#1B2A38;border-color:#1B2A38;color:#F6F1E8}}
+  body:has(.hero) .nav .btn.sm.dark:hover{background-color:var(--brick)!important;border-color:var(--brick)!important;color:#fff!important}
+  @media (min-width:901px){
+    body:has(.hero) .nav:not(.open)>.wrap>nav>ul>li>a{animation:home-nav-ink linear both;animation-timeline:--walk;animation-range:entry 92% entry 100%}
+    body:has(.hero) .nav>.wrap>nav>ul>li>a:hover{color:var(--brick)!important}
+  }
+}
