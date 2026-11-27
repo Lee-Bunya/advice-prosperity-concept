@@ -1496,3 +1496,35 @@ body:has(.pp-prep) .next-note.now::before{background:var(--brick);box-shadow:0 0
 .form-done h3{font-size:clamp(26px,2.6vw,36px);color:var(--bluestone)}
 .form-done p{margin-top:12px;font-size:16px;color:var(--ink)}
 .form-done a{color:var(--bluestone);font-weight:600}
+
+/* Prepare advice: SOA steps panel in place of the photo (Phoebe, Nov 2026) */
+.pp-soa{display:grid;place-items:center;padding:clamp(28px,4vw,56px) clamp(20px,3.4vw,52px);background:radial-gradient(80% 70% at 100% 0%,#526656 0%,rgba(82,102,86,0) 70%),var(--ledger)}
+.pp-soa .win{width:100%;max-width:440px}
+.soa-steps{list-style:none;margin:0;padding:6px 20px}
+.soa-steps li{display:grid;grid-template-columns:22px minmax(0,1fr) auto;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--rule);font-size:13.5px}
+.soa-steps li:first-child{border-top:0}
+.soa-steps span{font-weight:600;color:var(--bluestone)}
+.soa-steps em{font-style:normal;font-size:12px;color:var(--workshirt);font-variant-numeric:tabular-nums}
+.soa-steps i{position:relative;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--rule);transition:background .35s var(--ease),border-color .35s var(--ease);transition-delay:calc(.35s + var(--i)*.32s)}
+.soa-steps i::after{content:"";position:absolute;left:7px;top:3.5px;width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg) scale(0);transition:transform .3s var(--ease);transition-delay:calc(.45s + var(--i)*.32s)}
+.soa-steps em{opacity:0;transition:opacity .35s var(--ease);transition-delay:calc(.45s + var(--i)*.32s)}
+.pp-soa.in .soa-steps i{background:var(--ledger);border-color:var(--ledger)}
+.pp-soa.in .soa-steps i::after{transform:rotate(45deg) scale(1)}
+.pp-soa.in .soa-steps em{opacity:1}
+.soa-ft{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;background:var(--fleece);border-top:1px solid var(--rule);font-size:12.5px;font-weight:600;color:var(--brick);opacity:0;transition:opacity .4s var(--ease) 2.4s}
+.soa-ft span{display:flex;align-items:center;gap:10px}
+.soa-ft span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--brick);box-shadow:0 0 0 4px rgba(169,83,58,.14)}
+.soa-ft b{font-size:15px;color:var(--bluestone);letter-spacing:-.01em}
+.pp-soa.in .soa-ft{opacity:1}
+.pp-soa{aspect-ratio:auto}
+.pp-soa .win-hd .r,.soa-ft b,.soa-steps em{white-space:nowrap}
+@media (max-width:900px){.pp-soa{margin-right:0;border-radius:0 32vw 0 0;padding:44px 18px 22px}}
+@media (max-width:420px){.pp-soa .win-bar .s{display:none}.soa-steps{padding:4px 16px}.soa-steps li{font-size:13px}}
+@media (prefers-reduced-motion:reduce){.soa-steps i,.soa-steps i::after,.soa-steps em,.soa-ft{transition:none}}
+.pp-soa{--r:min(18vw,260px);padding:calc(var(--r)*.3 + 14px) calc(var(--r)*.3 + 14px) clamp(28px,3.4vw,48px) clamp(20px,3vw,44px)}
+.pp-soa .win{border-top-right-radius:22px}
+@media (max-width:900px){.pp-soa{--r:32vw;padding:calc(var(--r)*.66 + 6px) 12px 18px 12px}}
+/* SOA card on its own: no frame or panel behind it */
+.pp-soa,.pp-soa{background:none;outline:0;border-radius:0;overflow:visible;padding:0;aspect-ratio:auto}
+.pp-soa .win{max-width:480px;border-radius:10px;box-shadow:0 0 0 1px rgba(27,42,56,.06),0 50px 90px -46px rgba(17,28,38,.5),0 14px 30px -20px rgba(17,28,38,.25)}
+@media (max-width:900px){.pp-soa{margin:0 0 40px;padding:0}.pp-soa .win{max-width:none}}
